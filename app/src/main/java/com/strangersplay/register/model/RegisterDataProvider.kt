@@ -8,12 +8,12 @@ class RegisterDataProvider(private val restRegisterService: RestRegisterService)
             = restRegisterService.regsiterAccount(login,password,email)
 
     suspend fun mockedRegisterAccount(userRegisterData: UserRegisterData): RegisterResponse{
-        if(userRegisterData.login == "abc"){
+        if(userRegisterData.username == "abc"){
             return RegisterResponse(
                 status = "success",
                 message = null
             )
-        } else if (userRegisterData.login == "123"){
+        } else if (userRegisterData.username == "123"){
             return RegisterResponse(
                 status = "error",
                 message = "login_used"

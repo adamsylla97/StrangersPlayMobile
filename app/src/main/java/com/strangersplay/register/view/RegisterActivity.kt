@@ -39,10 +39,12 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
 
     override fun getRegisterData(): UserRegisterData {
         return UserRegisterData(
-            login = loginEditText.text.toString(),
+            username = loginEditText.text.toString(),
             password = passwordEditText.text.toString(),
             repeatPassword = repeatPasswordEditText.text.toString(),
-            email = emailEditText.text.toString()
+            email = emailEditText.text.toString(),
+            firstName = firstNameEditText.text.toString(),
+            lastName = lastNameEditText.text.toString()
         )
     }
 
