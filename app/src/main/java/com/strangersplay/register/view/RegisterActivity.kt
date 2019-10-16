@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.strangersplay.InstanceProvider
 import com.strangersplay.R
 import com.strangersplay.register.model.RegisterDataProvider
 import com.strangersplay.register.model.RegisterService
@@ -14,9 +15,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
 
-    private val dataProvider = RegisterDataProvider()
-    private val registerService = RegisterService(dataProvider)
-    private val registerPresenter = RegisterPresenter(this, registerService)
+    private val registerPresenter = InstanceProvider.getRegisterPresenter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

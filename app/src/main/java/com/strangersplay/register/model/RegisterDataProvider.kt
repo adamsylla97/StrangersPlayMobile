@@ -1,6 +1,11 @@
 package com.strangersplay.register.model
 
-class RegisterDataProvider {
+import com.strangersplay.register.network.RestRegisterService
+
+class RegisterDataProvider(private val restRegisterService: RestRegisterService) {
+
+    suspend fun registerAccount(login: String, password: String, email: String) : RegisterResponse
+            = restRegisterService.regsiterAccount(login,password,email)
 
     suspend fun mockedRegisterAccount(userRegisterData: UserRegisterData): RegisterResponse{
         if(userRegisterData.login == "abc"){
