@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondaryDarkColor"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".login.view.ActivityLogin">
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp" />
+
+    <EditText
+        android:id="@+id/loginEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/login_screen_margin"
+        android:layout_marginEnd="@dimen/login_screen_margin"
+        android:background="@color/secondaryLightColor"
+        android:hint="username"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:textAlignment="center"
+        android:textColorHint="@color/secondaryColor"
+        android:textSize="30dp"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="30dp"/>
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:layout_marginStart="@dimen/login_screen_margin"
+        android:layout_marginEnd="@dimen/login_screen_margin"
+        android:background="@color/secondaryLightColor"
+        android:hint="password"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColorHint="@color/secondaryColor"
+        android:textSize="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/login_screen_margin"
+        android:layout_marginEnd="@dimen/login_screen_margin">
+
+        <TextView
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="register"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="@color/accentRed"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="forgot password?"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:textStyle="bold"
+            android:textColor="@color/accentRed"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="65dp"/>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/secondaryLightColor"
+        android:textColor="@color/secondaryColor"
+        android:text="login"
+        android:paddingStart="@dimen/login_screen_margin"
+        android:paddingEnd="@dimen/login_screen_margin"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
+
+
+
+</LinearLayout>
