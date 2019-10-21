@@ -33,7 +33,7 @@ class NewestEventAdapter(private val listener: (Event) -> Unit): RecyclerView.Ad
 
     class EventsHolder(private val view: View, private val itemClick: (Event) -> Unit):RecyclerView.ViewHolder(view){
         fun bind(event: Event){
-            view.eventName.text = event.name
+            view.eventTitle.text = event.name
         }
 
     }
