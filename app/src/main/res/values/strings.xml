@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">StrangersPlay</string>
+    <string name="test">Test</string>
+    <string name="level">Sought level:</string>
+    <string name="price">Price:</string>
+    <string name="exit">Exit</string>
+    <string name="join">Join</string>
+    <string name="localization">Localization:</string>
+    <string name="date">Set date</string>
+    <string name="calender">Event date</string>
 </resources>
