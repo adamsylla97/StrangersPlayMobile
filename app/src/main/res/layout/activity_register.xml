@@ -31,13 +31,12 @@
                 android:layout_height="30dp"/>
 
             <TextView
+                style="@style/registerTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="Username"
                 android:textAlignment="center"
                 android:textSize="24dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/accentRed"
                 />
 
@@ -81,6 +80,44 @@
 
             <EditText
                 android:id="@+id/repeatPasswordEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondaryLightColor"
+                android:textSize="30dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="First name"
+                android:textAlignment="center"
+                android:textSize="24dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/accentRed"/>
+
+            <EditText
+                android:id="@+id/firstNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/secondaryLightColor"
+                android:textSize="30dp"
+                android:layout_marginStart="60dp"
+                android:layout_marginEnd="60dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Last name"
+                android:textAlignment="center"
+                android:textSize="24dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/accentRed"/>
+
+            <EditText
+                android:id="@+id/lastNameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/secondaryLightColor"
