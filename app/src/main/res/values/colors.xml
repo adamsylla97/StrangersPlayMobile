@@ -7,7 +7,8 @@
     <color name="secondaryLightColor">#787878</color>
     <color name="secondaryDarkColor">#3B3939</color>
     <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">#ffffff</color>
+    <color name="secondaryTextColor">#bdbdbd</color>
 
     <color name="accentRed">#d33e39</color>
+    <color name="accentYellow">#fff500</color>
 </resources>

@@ -7,6 +7,6 @@ import retrofit2.http.POST
 interface RestRegisterService {
 
     @POST("/register")
-    suspend fun regsiterAccount(@Body username: String, @Body password: String, @Body email: String):  RegisterResponse
+    suspend fun regsiterAccount(@Body login: String, @Body password: String, @Body email: String):  RegisterResponse
 
 }
