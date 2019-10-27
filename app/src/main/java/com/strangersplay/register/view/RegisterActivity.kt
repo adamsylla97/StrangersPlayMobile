@@ -2,15 +2,11 @@ package com.strangersplay.register.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
-import com.strangersplay.register.model.RegisterDataProvider
-import com.strangersplay.register.model.RegisterService
 import com.strangersplay.register.model.UserRegisterData
-import com.strangersplay.register.presenter.RegisterPresenter
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
@@ -41,7 +37,7 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         return UserRegisterData(
             username = loginEditText.text.toString(),
             password = passwordEditText.text.toString(),
-            repeatPassword = repeatPasswordEditText.text.toString(),
+            active = true,
             email = emailEditText.text.toString(),
             firstName = firstNameEditText.text.toString(),
             lastName = lastNameEditText.text.toString()

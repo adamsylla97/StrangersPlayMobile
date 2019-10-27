@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.strangersplay.R
 import com.strangersplay.newest_event.model.Event
 import kotlinx.android.synthetic.main.event_item.view.*
@@ -34,6 +35,7 @@ class NewestEventAdapter(private val listener: (Event) -> Unit): RecyclerView.Ad
     class EventsHolder(private val view: View, private val itemClick: (Event) -> Unit):RecyclerView.ViewHolder(view){
         fun bind(event: Event){
             view.eventTitle.text = event.name
+            Glide.with(view).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(view.eventImage)
         }
 
     }
