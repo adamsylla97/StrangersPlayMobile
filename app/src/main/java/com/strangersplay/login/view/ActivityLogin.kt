@@ -6,10 +6,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
-import com.strangersplay.login.model.LoginService
 import com.strangersplay.login.model.UserLoginData
-import com.strangersplay.login.presenter.LoginPresenter
-import com.strangersplay.newest_event.NewestEventActivity
+import com.strangersplay.newest_event.view.NewestEventActivity
 import com.strangersplay.register.view.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
