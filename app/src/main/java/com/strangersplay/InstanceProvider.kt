@@ -15,6 +15,11 @@ import com.strangersplay.register.model.RegisterService
 import com.strangersplay.register.network.RestRegisterService
 import com.strangersplay.register.presenter.RegisterPresenter
 import com.strangersplay.register.view.RegisterView
+import com.strangersplay.single_event.model.SingleEventDataProvider
+import com.strangersplay.single_event.model.SingleEventService
+import com.strangersplay.single_event.network.RestSingleEventService
+import com.strangersplay.single_event.presenter.SingleEventPresenter
+import com.strangersplay.single_event.view.SingleEventView
 
 object InstanceProvider {
 
@@ -40,5 +45,15 @@ object InstanceProvider {
         val service = NewestEventService(dataProvider)
         val presenter = NewestEventPresenter(service, view)
         return presenter
+    }
+
+    fun getSingleEventPresenter(view: SingleEventView): SingleEventPresenter {
+        val rest = RestServiceBuilder.build(RestSingleEventService::class.java)
+        val dataProvider = SingleEventDataProvider(rest)
+        val service = SingleEventService(dataProvider)
+        val presenter = SingleEventPresenter(service, view)
+
+        return presenter
+
     }
 }

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/secondaryDarkColor"
+    tools:context=".single_event.view.SingleEventActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/eventTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="TextView"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/eventImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Jaki poziom jest poszukiwany:"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="24sp" />
+
+            <RatingBar
+                android:id="@+id/eventRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:stepSize="0.5" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Lokalizacja:"
+                android:textColor="@color/secondaryTextColor"
+                android:textSize="24sp" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/eventLocalizationMapView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:text="Składka:"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/eventContributionTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:text="TextView"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/exitButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/secondaryLightColor"
+                    android:paddingStart="@dimen/login_screen_margin"
+                    android:paddingEnd="@dimen/login_screen_margin"
+                    android:text="Wyjdź"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/joinButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:background="@color/secondaryLightColor"
+                    android:paddingStart="@dimen/login_screen_margin"
+                    android:paddingEnd="@dimen/login_screen_margin"
+                    android:text="Dołącz"
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
