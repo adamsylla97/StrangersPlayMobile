@@ -8,4 +8,5 @@
     <string name="localization">Localization:</string>
     <string name="date">Set date</string>
     <string name="calender">Event date</string>
+    <string name="newest">Newest</string>
 </resources>
