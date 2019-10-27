@@ -1,6 +1,5 @@
 package com.strangersplay.newest_event.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,10 +10,9 @@ import com.strangersplay.InstanceProvider
 import com.strangersplay.R
 import com.strangersplay.newest_event.adapters.NewestEventAdapter
 import com.strangersplay.newest_event.model.Event
-import com.strangersplay.newest_event.presenter.NewestEventPresenter
 import kotlinx.android.synthetic.main.activity_newest_event.*
 
-class NewestEventActivity : Fragment(), NewestEventView {
+class NewestEventFragment : Fragment(), NewestEventView {
 
     private val presenter = InstanceProvider.getNewestEventPresenter(this)
     private val newestEventAdapter = NewestEventAdapter{}
