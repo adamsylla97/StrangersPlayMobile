@@ -1,95 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/secondaryDarkColor"
-    android:orientation="vertical"
-    android:gravity="center"
     tools:context=".login.view.ActivityLogin">
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <EditText
-        android:id="@+id/loginEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/login_screen_margin"
-        android:layout_marginEnd="@dimen/login_screen_margin"
-        android:background="@color/secondaryLightColor"
-        android:hint="username"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif"
-        android:textAlignment="center"
-        android:textColor="@color/secondaryTextColor"
-        android:textColorHint="@color/secondaryTextColor"
-        android:textSize="30dp"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="30dp"/>
-
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:layout_marginStart="@dimen/login_screen_margin"
-        android:layout_marginEnd="@dimen/login_screen_margin"
-        android:background="@color/secondaryLightColor"
-        android:hint="password"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textColor="@color/secondaryTextColor"
-        android:textColorHint="@color/secondaryTextColor"
-        android:textSize="30dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="@dimen/login_screen_margin"
-        android:layout_marginEnd="@dimen/login_screen_margin">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/registerButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="register"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:textColor="@color/accentRed"/>
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/loginEditText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="forgot password?"
-            android:layout_weight="1"
-            android:textAlignment="textEnd"
-            android:textStyle="bold"
-            android:textColor="@color/accentRed"/>
+            android:layout_marginStart="@dimen/login_screen_margin"
+            android:layout_marginEnd="@dimen/login_screen_margin"
+            android:background="@color/secondaryLightColor"
+            android:fontFamily="sans-serif"
+            android:hint="username"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryTextColor"
+            android:textColorHint="@color/secondaryTextColor"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30dp" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/login_screen_margin"
+            android:layout_marginEnd="@dimen/login_screen_margin"
+            android:background="@color/secondaryLightColor"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:textColor="@color/secondaryTextColor"
+            android:textColorHint="@color/secondaryTextColor"
+            android:textSize="30dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/login_screen_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="@dimen/login_screen_margin">
+
+            <TextView
+                android:id="@+id/registerButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="register"
+                android:textColor="@color/accentRed"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="forgot password?"
+                android:textAlignment="textEnd"
+                android:textColor="@color/accentRed"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="65dp" />
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/login_screen_margin"
+            android:layout_marginEnd="@dimen/login_screen_margin"
+            android:background="@color/secondaryLightColor"
+            android:text="login"
+            android:textColor="@color/secondaryTextColor"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="65dp"/>
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/secondaryLightColor"
-        android:textColor="@color/secondaryTextColor"
-        android:text="login"
-        android:paddingStart="@dimen/login_screen_margin"
-        android:paddingEnd="@dimen/login_screen_margin"
-        android:textSize="16dp"
-        android:textStyle="bold"/>
-
-
-
-</LinearLayout>
+</ScrollView>
