@@ -12,11 +12,6 @@ import com.strangersplay.InstanceProvider
 
 import com.strangersplay.R
 import com.strangersplay.single_event.model.SingleEvent
-import kotlinx.android.synthetic.main.activity_single_event.*
-import kotlinx.android.synthetic.main.activity_single_event.eventContributionTextView
-import kotlinx.android.synthetic.main.activity_single_event.eventImage
-import kotlinx.android.synthetic.main.activity_single_event.eventRatingBar
-import kotlinx.android.synthetic.main.activity_single_event.eventTitleTextView
 import kotlinx.android.synthetic.main.fragment_single_event.*
 
 class SingleEventFragment : Fragment(), SingleEventView {

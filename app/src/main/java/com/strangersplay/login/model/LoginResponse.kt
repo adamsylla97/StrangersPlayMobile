@@ -1,6 +1,6 @@
 package com.strangersplay.login.model
 
 data class LoginResponse(
-    val status: String,
+    val httpCode: Int,
     val message: String?
 )

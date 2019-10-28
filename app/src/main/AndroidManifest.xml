@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".newest_event.view.NewestEventActivity" />
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".newest_event.view.NewestEventActivity"></activity>
         <activity android:name=".register.view.RegisterActivity" /> <!-- <activity android:name=".login.view.ActivityLogin"></activity> -->
         <activity android:name=".login.view.ActivityLogin">
             <intent-filter>
