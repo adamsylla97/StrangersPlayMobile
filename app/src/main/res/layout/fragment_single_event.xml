@@ -113,7 +113,7 @@
                         android:background="@color/secondaryLightColor"
                         android:text="Wyjdź"
                         android:textColor="@color/secondaryTextColor"
-                        android:textSize="16sp"
+                        android:textSize="16dp"
                         android:textStyle="bold" />
 
                     <Button
@@ -125,7 +125,7 @@
                         android:background="@color/secondaryLightColor"
                         android:text="Dołącz"
                         android:textColor="@color/secondaryTextColor"
-                        android:textSize="16sp"
+                        android:textSize="16dp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
