@@ -8,14 +8,13 @@
     <fragment
         android:id="@+id/newestEventFragment"
         android:name="com.strangersplay.newest_event.view.NewestEventFragment"
-        android:label="fragment_newest_event"
+        android:label="Newest events"
         tools:layout="@layout/fragment_newest_event" >
-        <action
-            android:id="@+id/action_newestEventFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.strangersplay.categories.view.CategoryFragment"
-        android:label="CategoryFragment" />
+        android:label="Categories"
+        tools:layout="@layout/fragment_categories"/>
 </navigation>
