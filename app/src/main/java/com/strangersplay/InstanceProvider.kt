@@ -1,5 +1,10 @@
 package com.strangersplay
 
+import com.strangersplay.categories.model.CategoryDataProvider
+import com.strangersplay.categories.model.CategoryService
+import com.strangersplay.categories.network.RestCategoryService
+import com.strangersplay.categories.presenter.CategoryPresenter
+import com.strangersplay.categories.view.CategoryView
 import com.strangersplay.login.model.LoginDataProvider
 import com.strangersplay.login.model.LoginService
 import com.strangersplay.login.network.RestLoginService
@@ -27,11 +32,11 @@ object InstanceProvider {
         val rest = RestServiceBuilder.build(RestRegisterService::class.java)
         val dataProvider = RegisterDataProvider(rest)
         val service = RegisterService(dataProvider)
-        val presenter = RegisterPresenter(view,service)
+        val presenter = RegisterPresenter(view, service)
         return presenter
     }
 
-    fun getLoginPresenter(view: LoginView): LoginPresenter{
+    fun getLoginPresenter(view: LoginView): LoginPresenter {
         val rest = RestServiceBuilder.build(RestLoginService::class.java)
         val dataProvider = LoginDataProvider(rest)
         val service = LoginService(dataProvider)
@@ -39,7 +44,7 @@ object InstanceProvider {
         return presenter
     }
 
-    fun getNewestEventPresenter(view: NewestEventView): NewestEventPresenter{
+    fun getNewestEventPresenter(view: NewestEventView): NewestEventPresenter {
         val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
         val dataProvider = NewestEventDataProvider(rest)
         val service = NewestEventService(dataProvider)
@@ -55,5 +60,13 @@ object InstanceProvider {
 
         return presenter
 
+    }
+
+    fun getCategoryPresenter(view: CategoryView): CategoryPresenter {
+        val rest = RestServiceBuilder.build(RestCategoryService::class.java)
+        val dataProvider = CategoryDataProvider(rest)
+        val service = CategoryService(dataProvider)
+        val presenter = CategoryPresenter(service, view)
+        return presenter
     }
 }

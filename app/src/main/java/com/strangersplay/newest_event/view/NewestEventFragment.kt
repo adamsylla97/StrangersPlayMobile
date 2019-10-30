@@ -10,7 +10,7 @@ import com.strangersplay.InstanceProvider
 import com.strangersplay.R
 import com.strangersplay.newest_event.adapters.NewestEventAdapter
 import com.strangersplay.newest_event.model.Event
-import kotlinx.android.synthetic.main.activity_newest_event.*
+import kotlinx.android.synthetic.main.fragment_newest_event.*
 
 class NewestEventFragment : Fragment(), NewestEventView {
 
@@ -20,7 +20,7 @@ class NewestEventFragment : Fragment(), NewestEventView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.activity_newest_event, container, false)
+    ): View? = inflater.inflate(R.layout.fragment_newest_event, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

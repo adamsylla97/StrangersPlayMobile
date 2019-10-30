@@ -9,4 +9,10 @@
     <string name="date">Set date</string>
     <string name="calender">Event date</string>
     <string name="newest">Newest</string>
+    <string name="football">Football</string>
+    <string name="volleyball">Volleyball</string>
+    <string name="basketball">Basketball</string>
+    <string name="tennis">Tennis</string>
+    <string name="other">Other</string>
+    <string name="picture">picture</string>
 </resources>
