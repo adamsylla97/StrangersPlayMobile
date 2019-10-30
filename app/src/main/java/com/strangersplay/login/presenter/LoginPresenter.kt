@@ -21,19 +21,21 @@ class LoginPresenter(private val loginView: LoginView, private val loginService:
 
     fun loginToAccount(){
         val loginData = loginView.getLoginData()
-        try{
-            ioScope.launch {
+
+        ioScope.launch {
+            try{
                 val response = loginService.loginToAccount(loginData)
                 mainScope.launch {
-                    if(200.equals(response.httpCode)) {
+                    if(200 == response.httpCode) {
+                        Log.i("supertest123","$response  $loginData")
                         loginView.loginToAccount()
-                    } else if(401.equals(response.httpCode)){
+                    } else if(401 == response.httpCode){
                         loginView.displayToast("Podano nieprawidlowe login lub haslo.")
                     }
                 }
+            }catch (e: Exception){
+                Log.i("supertest123","Podano nieprawidlowe login lub haslo.    ${loginData}   ${e.message}")
             }
-        }catch (e: Exception){
-            Log.i("supertest123","Podano nieprawidlowe login lub haslo.    ${loginData}")
         }
     }
 
