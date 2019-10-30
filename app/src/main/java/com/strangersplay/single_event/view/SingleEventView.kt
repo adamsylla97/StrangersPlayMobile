@@ -4,4 +4,5 @@ import com.strangersplay.single_event.model.SingleEvent
 
 interface SingleEventView {
     fun displayEvent(event: SingleEvent)
+    fun getEventId(): Int
 }

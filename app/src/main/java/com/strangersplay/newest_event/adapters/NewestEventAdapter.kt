@@ -9,7 +9,7 @@ import com.strangersplay.R
 import com.strangersplay.newest_event.model.Event
 import kotlinx.android.synthetic.main.event_item.view.*
 
-class NewestEventAdapter(private val listener: (Event) -> Unit): RecyclerView.Adapter<NewestEventAdapter.EventsHolder>() {
+class NewestEventAdapter(private val listener: (Int) -> Unit): RecyclerView.Adapter<NewestEventAdapter.EventsHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsHolder {
         val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.event_item, parent, false)
         return EventsHolder(inflatedView, listener)
@@ -32,10 +32,13 @@ class NewestEventAdapter(private val listener: (Event) -> Unit): RecyclerView.Ad
         holder.bind(item)
     }
 
-    class EventsHolder(private val view: View, private val itemClick: (Event) -> Unit):RecyclerView.ViewHolder(view){
+    class EventsHolder(private val view: View, private val itemClick: (eventId: Int) -> Unit):RecyclerView.ViewHolder(view){
         fun bind(event: Event){
             view.eventTitle.text = event.title
             Glide.with(view).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(view.eventImage)
+            view.setOnClickListener {
+                itemClick(event.id)
+            }
         }
 
     }

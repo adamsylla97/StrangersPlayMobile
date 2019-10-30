@@ -18,9 +18,10 @@ class SingleEventPresenter(private val singleEventService: SingleEventService, p
 
     fun displaySingleEvent(){
         ioScope.launch {
-            val event = singleEventService.getSingleEvent()
+            val eventId = singleEventView.getEventId()
+            val singleEventInformation = singleEventService.getSingleEvent(eventId)
             mainScope.launch {
-                singleEventView.displayEvent(event)
+                singleEventView.displayEvent(singleEventInformation)
             }
         }
     }

@@ -1,7 +1,9 @@
 package com.strangersplay.single_event.model
 
 class SingleEventService(private val singleEventDataProvider: SingleEventDataProvider) {
-    fun getSingleEvent(): SingleEvent{
-        return singleEventDataProvider.mockGetSingleEvent()
+
+    suspend fun getSingleEvent(eventId: Int): SingleEvent{
+        return singleEventDataProvider.getSingleEventInfo(eventId)
     }
+
 }

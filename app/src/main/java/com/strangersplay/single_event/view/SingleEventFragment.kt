@@ -1,7 +1,5 @@
 package com.strangersplay.single_event.view
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,22 +10,35 @@ import com.strangersplay.InstanceProvider
 
 import com.strangersplay.R
 import com.strangersplay.single_event.model.SingleEvent
+import kotlinx.android.synthetic.main.event_item.view.*
 import kotlinx.android.synthetic.main.fragment_single_event.*
 
-class SingleEventFragment : Fragment(), SingleEventView {
+class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventView {
 
     private val singleEventPresenter = InstanceProvider.getSingleEventPresenter(this)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_single_event, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         singleEventPresenter.displaySingleEvent()
     }
 
+    override fun getEventId(): Int {
+        return eventId
+    }
+
     override fun displayEvent(event: SingleEvent) {
-        eventTitleTextView.text = event.eventTitle
-        Glide.with(this).load(event.eventImage).into(eventImage)
-        eventRatingBar.numStars = event.eventLevel
-        eventContributionTextView.text = event.eventContribution.toString()
-        localizationTextView.text = event.eventLocalization
+        eventTitleTextView.text = event.title
+        Glide.with(this).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(eventImage)
+        eventRatingBar.numStars = event.level
+        eventContributionTextView.text = event.price.toString()
+        localizationTextView.text = event.eventLocation
     }
 }
