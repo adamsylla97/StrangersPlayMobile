@@ -3,6 +3,7 @@ package com.strangersplay.login.network
 import com.strangersplay.login.model.LoginResponse
 import com.strangersplay.login.model.UserLoginData
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RestLoginService {

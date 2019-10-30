@@ -34,7 +34,7 @@ class NewestEventAdapter(private val listener: (Event) -> Unit): RecyclerView.Ad
 
     class EventsHolder(private val view: View, private val itemClick: (Event) -> Unit):RecyclerView.ViewHolder(view){
         fun bind(event: Event){
-            view.eventTitle.text = event.name
+            view.eventTitle.text = event.title
             Glide.with(view).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(view.eventImage)
         }
 
