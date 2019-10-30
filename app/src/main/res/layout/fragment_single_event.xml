@@ -111,11 +111,9 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:background="@color/secondaryLightColor"
-                        android:paddingStart="@dimen/login_screen_margin"
-                        android:paddingEnd="@dimen/login_screen_margin"
                         android:text="Wyjdź"
                         android:textColor="@color/secondaryTextColor"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <Button
@@ -125,11 +123,9 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:background="@color/secondaryLightColor"
-                        android:paddingStart="@dimen/login_screen_margin"
-                        android:paddingEnd="@dimen/login_screen_margin"
                         android:text="Dołącz"
                         android:textColor="@color/secondaryTextColor"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
