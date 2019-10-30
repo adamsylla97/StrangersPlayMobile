@@ -1,12 +1,13 @@
 package com.strangersplay.login.network
 
 import com.strangersplay.login.model.LoginResponse
-import retrofit2.http.Body
-import retrofit2.http.POST
+import com.strangersplay.login.model.UserLoginData
+import com.strangersplay.single_event.model.SingleEvent
+import retrofit2.http.*
 
 interface RestLoginService {
 
     @POST("/login")
-    suspend fun loginToAccount(@Body username: String, @Body password: String): LoginResponse
+    suspend fun loginToAccount(@Body userLoginData: UserLoginData): LoginResponse
 
 }

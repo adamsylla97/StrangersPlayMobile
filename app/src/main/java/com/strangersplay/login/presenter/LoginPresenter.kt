@@ -1,11 +1,13 @@
 package com.strangersplay.login.presenter
 
+import android.util.Log
 import com.strangersplay.login.model.LoginService
 import com.strangersplay.login.view.LoginView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import kotlin.Exception
 
 class LoginPresenter(private val loginView: LoginView, private val loginService: LoginService) {
 
@@ -21,17 +23,18 @@ class LoginPresenter(private val loginView: LoginView, private val loginService:
         val loginData = loginView.getLoginData()
 
         ioScope.launch {
-            val response = loginService.loginToAccount(loginData.username, loginData.password)
-            mainScope.launch {
-                if("success".equals(response.status)) {
-                    loginView.loginToAccount()
-                } else if("error".equals(response.status)){
-                    if("bad_login".equals(response.message)){
-                        loginView.displayToast("Your username or password were incorrect, try again.")
-                    } else if ("no_account".equals(response.message)){
-                        loginView.displayToast("There is no such account in database.")
+            try{
+                val response = loginService.loginToAccount(loginData)
+                mainScope.launch {
+                    if(200 == response.httpCode) {
+                        Log.i("supertest123","$response  $loginData")
+                        loginView.loginToAccount()
+                    } else if(401 == response.httpCode){
+                        loginView.displayToast("Podano nieprawidlowe login lub haslo.")
                     }
                 }
+            }catch (e: Exception){
+                Log.i("supertest123","Podano nieprawidlowe login lub haslo.    ${loginData}   ${e.message}")
             }
         }
     }

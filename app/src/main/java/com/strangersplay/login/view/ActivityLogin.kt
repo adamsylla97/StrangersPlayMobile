@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.strangersplay.InstanceProvider
+import com.strangersplay.MainActivity
 import com.strangersplay.R
-import com.strangersplay.login.model.LoginService
 import com.strangersplay.login.model.UserLoginData
-import com.strangersplay.login.presenter.LoginPresenter
-import com.strangersplay.newest_event.NewestEventActivity
 import com.strangersplay.register.view.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -42,7 +40,7 @@ class ActivityLogin : AppCompatActivity(), LoginView {
     }
 
     override fun loginToAccount() {
-        startActivity(Intent(this, NewestEventActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
     }
 
     override fun onDestroy() {

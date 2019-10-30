@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/newestEventFragment">
+
+    <fragment
+        android:id="@+id/newestEventFragment"
+        android:name="com.strangersplay.newest_event.view.NewestEventFragment"
+        android:label="Newest events"
+        tools:layout="@layout/fragment_newest_event" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.strangersplay.categories.view.CategoryFragment"
+        android:label="Categories"
+        tools:layout="@layout/fragment_categories"/>
+</navigation>
