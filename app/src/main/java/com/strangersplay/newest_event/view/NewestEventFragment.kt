@@ -43,7 +43,7 @@ class NewestEventFragment : Fragment(), NewestEventView {
         val singleEventFragment = SingleEventFragment(eventId)
         fragmentManager?.let{
             it.beginTransaction()
-                .addToBackStack("worker_item")
+
                 .replace(R.id.newestEventFragment,singleEventFragment)
                 .commit()
         }

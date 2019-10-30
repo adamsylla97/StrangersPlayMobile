@@ -20,6 +20,11 @@ import com.strangersplay.register.model.RegisterService
 import com.strangersplay.register.network.RestRegisterService
 import com.strangersplay.register.presenter.RegisterPresenter
 import com.strangersplay.register.view.RegisterView
+import com.strangersplay.single_category.model.SingleCategoryDataProvider
+import com.strangersplay.single_category.model.SingleCategoryService
+import com.strangersplay.single_category.network.RestSingleCategoryService
+import com.strangersplay.single_category.presenter.SingleCategoryPresenter
+import com.strangersplay.single_category.view.SingleCategoryView
 import com.strangersplay.single_event.model.SingleEventDataProvider
 import com.strangersplay.single_event.model.SingleEventService
 import com.strangersplay.single_event.network.RestSingleEventService
@@ -49,6 +54,14 @@ object InstanceProvider {
         val dataProvider = NewestEventDataProvider(rest)
         val service = NewestEventService(dataProvider)
         val presenter = NewestEventPresenter(service, view)
+        return presenter
+    }
+
+    fun getSingleCategoryPresenter(view: SingleCategoryView): SingleCategoryPresenter {
+        val rest = RestServiceBuilder.build(RestSingleCategoryService::class.java)
+        val dataProvider = SingleCategoryDataProvider(rest)
+        val service = SingleCategoryService(dataProvider)
+        val presenter = SingleCategoryPresenter(service, view)
         return presenter
     }
 

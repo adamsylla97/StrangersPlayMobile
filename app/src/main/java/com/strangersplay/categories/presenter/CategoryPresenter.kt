@@ -23,7 +23,7 @@ class CategoryPresenter(
     fun displayCategories() {
 
         ioScope.launch {
-            val categories = categoryService.getCategory()
+            val categories = categoryService.getCategories()
             mainScope.launch {
                 categoryView.updateList(categories)
             }

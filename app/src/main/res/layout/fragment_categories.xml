@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".newest_event.view.NewestEventFragment">
+    tools:context=".newest_event.view.NewestEventFragment"
+    android:id="@+id/fragmentCategories">
 
 
     <androidx.recyclerview.widget.RecyclerView

@@ -10,12 +10,14 @@ import com.strangersplay.InstanceProvider
 import com.strangersplay.R
 import com.strangersplay.categories.adapter.CategoryAdapter
 import com.strangersplay.categories.model.Category
+import com.strangersplay.single_category.view.SingleCategoryFragment
+import com.strangersplay.single_event.view.SingleEventFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
 
 class CategoryFragment : Fragment(), CategoryView {
 
     private val presenter = InstanceProvider.getCategoryPresenter(this)
-    private val categoryAdapter = CategoryAdapter {}
+    private val categoryAdapter = CategoryAdapter {onItemClicked(it)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,15 @@ class CategoryFragment : Fragment(), CategoryView {
         }
 
         presenter.displayCategories()
+    }
+
+    private fun onItemClicked(categoryName: String){
+        val singleCategoryFragment = SingleCategoryFragment(categoryName)
+        fragmentManager?.let{
+            it.beginTransaction()
+                .replace(R.id.fragmentCategories,singleCategoryFragment)
+                .commit()
+        }
     }
 
     override fun updateList(categories: List<Category>) {
