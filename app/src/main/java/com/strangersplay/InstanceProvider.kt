@@ -30,8 +30,21 @@ import com.strangersplay.single_event.model.SingleEventService
 import com.strangersplay.single_event.network.RestSingleEventService
 import com.strangersplay.single_event.presenter.SingleEventPresenter
 import com.strangersplay.single_event.view.SingleEventView
+import com.strangersplay.user_profile.model.UserProfileDataProvider
+import com.strangersplay.user_profile.model.UserProfileService
+import com.strangersplay.user_profile.network.RestUserProfileService
+import com.strangersplay.user_profile.presenter.UserProfilePresenter
+import com.strangersplay.user_profile.view.UserProfileView
 
 object InstanceProvider {
+
+    fun getUserProfilePresenter(view: UserProfileView): UserProfilePresenter {
+        val rest = RestServiceBuilder.build(RestUserProfileService::class.java)
+        val dataProvider = UserProfileDataProvider(rest)
+        val service = UserProfileService(dataProvider)
+        val presenter = UserProfilePresenter(service, view)
+        return presenter
+    }
 
     fun getRegisterPresenter(view: RegisterView): RegisterPresenter {
         val rest = RestServiceBuilder.build(RestRegisterService::class.java)

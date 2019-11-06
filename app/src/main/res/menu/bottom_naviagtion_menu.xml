@@ -8,4 +8,8 @@
     <item android:id="@+id/categoryFragment"
         android:icon="@drawable/ic_cloud_queue_black_24dp"
         android:title="@string/menu_title_categories"/>
+
+    <item android:id="@+id/userProfileFragment"
+        android:icon="@drawable/ic_alien_head"
+        android:title="@string/profile_menu_title"/>
 </menu>
