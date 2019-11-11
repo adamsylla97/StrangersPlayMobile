@@ -12,6 +12,8 @@
         android:id="@+id/categoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/secondaryDarkColor"/>
+        android:background="@color/secondaryDarkColor"
+        tools:listitem="@layout/caterory_item"
+        tools:itemCount="3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
