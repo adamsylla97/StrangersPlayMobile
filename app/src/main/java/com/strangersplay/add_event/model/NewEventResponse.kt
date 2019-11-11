@@ -1,4 +1,6 @@
 package com.strangersplay.add_event.model
 
-class NewEventResponse {
-}
+data class NewEventResponse (
+    val httpCode: Int,
+    val message: String
+)

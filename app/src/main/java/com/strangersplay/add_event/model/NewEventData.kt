@@ -1,6 +1,6 @@
 package com.strangersplay.add_event.model
 
-data class NewEvent(
+data class NewEventData(
     val category: String,
     val creationTime: String,
     val description: String,
