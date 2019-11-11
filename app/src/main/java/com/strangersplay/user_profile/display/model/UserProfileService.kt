@@ -1,4 +1,4 @@
-package com.strangersplay.user_profile.model
+package com.strangersplay.user_profile.display.model
 
 class UserProfileService(private val userProfileDataProvider: UserProfileDataProvider){
 

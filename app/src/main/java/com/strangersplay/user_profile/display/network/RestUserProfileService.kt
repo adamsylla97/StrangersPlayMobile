@@ -1,6 +1,6 @@
-package com.strangersplay.user_profile.network
+package com.strangersplay.user_profile.display.network
 
-import com.strangersplay.user_profile.model.UserData
+import com.strangersplay.user_profile.display.model.UserData
 import retrofit2.http.GET
 import retrofit2.http.Path
 

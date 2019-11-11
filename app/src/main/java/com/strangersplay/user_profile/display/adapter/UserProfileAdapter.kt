@@ -1,15 +1,11 @@
-package com.strangersplay.user_profile.adapter
+package com.strangersplay.user_profile.display.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.strangersplay.R
-import com.strangersplay.categories.model.Category
-import com.strangersplay.user_profile.model.Comment
-import kotlinx.android.synthetic.main.caterory_item.view.*
-import kotlinx.android.synthetic.main.event_item.view.*
+import com.strangersplay.user_profile.display.model.Comment
 import kotlinx.android.synthetic.main.user_comments_item.view.*
 
 class UserProfileAdapter : RecyclerView.Adapter<UserProfileAdapter.CommentsHolder>() {

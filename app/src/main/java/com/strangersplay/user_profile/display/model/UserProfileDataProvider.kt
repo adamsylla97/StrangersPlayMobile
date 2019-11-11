@@ -1,6 +1,6 @@
-package com.strangersplay.user_profile.model
+package com.strangersplay.user_profile.display.model
 
-import com.strangersplay.user_profile.network.RestUserProfileService
+import com.strangersplay.user_profile.display.network.RestUserProfileService
 
 class UserProfileDataProvider(private val restUserProfileService: RestUserProfileService) {
 

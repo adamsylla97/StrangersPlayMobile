@@ -1,4 +1,4 @@
-package com.strangersplay.user_profile.view
+package com.strangersplay.user_profile.display.view
 
 
 import android.os.Bundle
@@ -11,12 +11,9 @@ import com.bumptech.glide.Glide
 import com.strangersplay.Config
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
-import com.strangersplay.categories.adapter.CategoryAdapter
-import com.strangersplay.categories.model.Category
-import com.strangersplay.user_profile.adapter.UserProfileAdapter
-import com.strangersplay.user_profile.model.Comment
-import com.strangersplay.user_profile.model.UserData
-import com.strangersplay.user_profile.presenter.UserProfilePresenter
+import com.strangersplay.user_profile.display.adapter.UserProfileAdapter
+import com.strangersplay.user_profile.display.model.UserData
+import com.strangersplay.user_profile.edit.view.EditUserProfileFragment
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 
 class UserProfileFragment : Fragment(), UserProfileView {
@@ -40,16 +37,30 @@ class UserProfileFragment : Fragment(), UserProfileView {
         }
 
         presenter.displayUserInformation()
+
+        updateProfile.setOnClickListener {
+            val profile = presenter.getProfile()
+            val updateProfileFragment = EditUserProfileFragment.newInstance(profile!!)
+
+            fragmentManager?.let {
+                it.beginTransaction()
+                    .add(R.id.userProfileFragment, updateProfileFragment)
+                    .addToBackStack("userProfile")
+                    .commit()
+
+            }
+        }
+
     }
 
     override fun updateProfile(profileInformation: UserData) {
 
         Glide.with(this).load(profileInformation.photo).placeholder(R.drawable.ic_alien_head).into(userProfilePhoto)
-        eventRatingBar.rating = profileInformation.level.toFloat()
+        eventRatingBar.rating = profileInformation.level!!.toFloat()
         userNameTV.text = "${profileInformation.firstName}  ${profileInformation.lastName}"
         userInformation.text = profileInformation.about
 
-        userProfileAdapter.addList(profileInformation.comments)
+        userProfileAdapter.addList(profileInformation.comments!!)
         userProfileAdapter.notifyDataSetChanged()
     }
 
