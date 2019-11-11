@@ -101,6 +101,13 @@ object InstanceProvider {
         return presenter
     }
 
+    fun getCategoriesService():CategoryService{
+        val rest = RestServiceBuilder.build(RestCategoryService::class.java)
+        val dataProvider = CategoryDataProvider(rest)
+        val service = CategoryService(dataProvider)
+        return service
+    }
+
     fun getNewEventPresenter(view: NewEventView): NewEventPresenter {
         val rest = RestServiceBuilder.build(RestNewEventService::class.java)
         val dataProvider=NewEventDataProvider(rest)

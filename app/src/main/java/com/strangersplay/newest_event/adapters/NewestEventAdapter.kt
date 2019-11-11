@@ -35,6 +35,10 @@ class NewestEventAdapter(private val listener: (Int) -> Unit): RecyclerView.Adap
     class EventsHolder(private val view: View, private val itemClick: (eventId: Int) -> Unit):RecyclerView.ViewHolder(view){
         fun bind(event: Event){
             view.eventTitle.text = event.title
+            view.eventPrice.text = event.price.toString()
+            view.eventTime.text = event.eventTime
+            view.eventRating.text = event.level.toString()+"/5"
+
             Glide.with(view).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(view.eventImage)
             view.setOnClickListener {
                 itemClick(event.id)

@@ -28,4 +28,10 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
     <string name="commnets_tv">Comments:</string>
     <string name="profile_menu_title">Profile</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="the_nearlest">The nearlest event</string>
+    <string name="lower_price">From lower to higher price</string>
+    <string name="higher_price">From higher to lower price</string>
+    <string name="least_people">From less to more people</string>
+    <string name="more_people">From more to less people</string>
 </resources>
