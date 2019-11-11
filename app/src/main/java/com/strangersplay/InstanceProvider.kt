@@ -1,5 +1,10 @@
 package com.strangersplay
 
+import com.strangersplay.add_event.model.NewEventDataProvider
+import com.strangersplay.add_event.model.NewEventService
+import com.strangersplay.add_event.network.RestNewEventService
+import com.strangersplay.add_event.presenter.NewEventPresenter
+import com.strangersplay.add_event.view.NewEventView
 import com.strangersplay.categories.model.CategoryDataProvider
 import com.strangersplay.categories.model.CategoryService
 import com.strangersplay.categories.network.RestCategoryService
@@ -95,4 +100,12 @@ object InstanceProvider {
         val presenter = CategoryPresenter(service, view)
         return presenter
     }
+
+    fun getNewEventPresenter(view: NewEventView): NewEventPresenter {
+        val rest = RestServiceBuilder.build(RestNewEventService::class.java)
+        val dataProvider=NewEventDataProvider(rest)
+        val service = NewEventService(dataProvider)
+        val presenter = NewEventPresenter(view,service)
+        return presenter
+          }
 }
