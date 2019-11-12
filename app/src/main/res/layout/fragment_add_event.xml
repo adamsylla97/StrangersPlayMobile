@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/newEventFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -9,7 +11,7 @@
         android:background="@color/secondaryDarkColor"
         android:orientation="vertical">
 
-        <TextView
+        <EditText
             android:id="@+id/eventTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,8 +20,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:ellipsize="end"
+            android:hint="@string/title"
+            android:inputType="text"
             android:maxLines="1"
-            android:text="@string/test"
             android:textColor="@color/secondaryLightColor"
             android:textSize="30dp"
             android:textStyle="bold" />
@@ -31,24 +34,71 @@
             android:layout_height="200dp"
             android:layout_margin="10dp" />
 
-        <TextView
-            android:id="@+id/ratingLabel"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ratingLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/level"
+                android:textColor="@color/secondaryLightColor"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:numStars="4"
+                android:stepSize="0.5" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/categoryLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/choose_category"
+                android:textColor="@color/secondaryLightColor"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="5"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/secondaryLightColor"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/eventDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="@string/level"
-            android:textColor="@color/secondaryLightColor"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:numStars="5"
-            android:stepSize="0.5" />
+            android:hint="@string/set_some_description"
+            android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+            tools:ignore="ExtraText" />
 
         <TextView
             android:id="@+id/localizationLabel"
@@ -64,7 +114,8 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="200dp"
+            android:layout_margin="10dp">
 
         </Space>
 
@@ -90,15 +141,14 @@
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
-                <TextView
+                <EditText
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="5"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="@string/test"
+                    android:hint="@string/in_pln"
+                    android:inputType="text"
                     android:textAlignment="center"
                     android:textColor="@color/secondaryLightColor"
                     android:textSize="20dp"
@@ -116,12 +166,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/eventTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:layout_weight="9"
                     android:layout_margin="10dp"
-                    />
+                    android:layout_weight="9"
+                    android:editable="false"
+                    android:inputType="text" />
 
                 <Button
                     android:id="@+id/dateLabel"
@@ -141,6 +192,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -150,6 +202,7 @@
                 android:layout_height="wrap_content">
 
                 <Button
+                    android:id="@+id/exitButton"
                     style="@style/button"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
@@ -157,11 +210,12 @@
                     android:text="@string/exit" />
 
                 <Button
+                    android:id="@+id/createEventButton"
                     style="@style/button"
                     android:layout_width="100dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:text="@string/join" />
+                    android:text="@string/add" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

@@ -1,13 +1,17 @@
 package com.strangersplay.newest_event.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
+import com.strangersplay.add_event.view.NewEventFragment
+import com.strangersplay.categories.view.CategoryFragment
 import com.strangersplay.newest_event.adapters.NewestEventAdapter
 import com.strangersplay.newest_event.model.Event
 import com.strangersplay.single_event.view.SingleEventFragment
@@ -25,12 +29,15 @@ class NewestEventFragment : Fragment(), NewestEventView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         newestEventsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newestEventAdapter
         }
-
+        addButton.setOnClickListener{
+            addButton.hide()
+            fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, NewEventFragment())?.addToBackStack("newestEvent")
+                ?.commit()
+        }
         presenter.displayNewestEvents()
     }
 
@@ -48,5 +55,4 @@ class NewestEventFragment : Fragment(), NewestEventView {
                 .commit()
         }
     }
-
 }
