@@ -63,7 +63,7 @@
                     android:textSize="24sp" />
 
                 <com.mapbox.mapboxsdk.maps.MapView
-                    android:id="@+id/mapView"
+                    android:id="@+id/singleEventMapView"
                     android:layout_width="match_parent"
                     android:layout_height="166dp"
                     mapbox:mapbox_cameraTargetLat="37.7749"

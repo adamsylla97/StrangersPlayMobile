@@ -54,7 +54,7 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
         super.onViewCreated(view, savedInstanceState)
 
         Mapbox.getInstance(activity?.applicationContext!!, getString(R.string.access_token))
-        mapView = view?.findViewById(R.id.mapView)!!
+        mapView = view?.findViewById(R.id.singleEventMapView)!!
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
             map = mapboxMap
@@ -72,7 +72,10 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
         Glide.with(this).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(eventImage)
         eventRatingBar.numStars = event.level
         eventContributionTextView.text = event.price.toString()
-        map.addMarker(MarkerOptions().position(LatLng(51.759445, 19.457216)))
+        val position = event.eventLocation.split(",")
+        if(position.size == 2) {
+            map.addMarker(MarkerOptions().position(LatLng(position[0].toDouble(), position[1].toDouble())))
+        }
     }
 
     private fun enableLocation(){
