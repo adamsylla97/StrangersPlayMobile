@@ -23,4 +23,5 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
     <string name="commnets_tv">Comments:</string>
     <string name="profile_menu_title">Profile</string>
+    <string name="access_token">pk.eyJ1IjoiYnJ6ZXppbyIsImEiOiJjazJ1c3A2eDMxN3hhM2RudjZnZnd0dzMwIn0.7S7rFwT6CULR7me_2rF6Ow</string>
 </resources>
