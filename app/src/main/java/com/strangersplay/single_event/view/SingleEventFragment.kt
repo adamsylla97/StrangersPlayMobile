@@ -1,18 +1,18 @@
 package com.strangersplay.single_event.view
 
 import android.location.Location
-import android.location.LocationListener
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineListener
 import com.mapbox.android.core.location.LocationEnginePriority
 import com.mapbox.android.core.location.LocationEngineProvider
-import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
@@ -27,20 +27,22 @@ import com.strangersplay.InstanceProvider
 
 import com.strangersplay.R
 import com.strangersplay.single_event.model.SingleEvent
-import kotlinx.android.synthetic.main.event_item.view.*
+import com.strangersplay.single_event.model.UsersInEventRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_single_event.*
 
-class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventView, PermissionsListener, LocationEngineListener {
+class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventView, LocationEngineListener {
 
     private lateinit var mapView: MapView
     private lateinit var map: MapboxMap
-    private lateinit var permissionManager: PermissionsManager
     private lateinit var originLocation: Location
 
     private var locationEngine: LocationEngine? = null
     private var locationLayerPlugin: LocationLayerPlugin? = null
 
     private val singleEventPresenter = InstanceProvider.getSingleEventPresenter(this)
+
+    private val usersAdapter = UsersInEventRecyclerViewAdapter{}
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +54,7 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        
         Mapbox.getInstance(activity?.applicationContext!!, getString(R.string.access_token))
         mapView = view?.findViewById(R.id.singleEventMapView)!!
         mapView.onCreate(savedInstanceState)
@@ -61,10 +63,20 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
             enableLocation()
             singleEventPresenter.displaySingleEvent()
         }
+
+        usersInEvent.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = usersAdapter
+        }
     }
 
     override fun getEventId(): Int {
         return eventId
+    }
+
+    override fun updateList(users: List<String>) {
+        usersAdapter.addList(users)
+        usersAdapter.notifyDataSetChanged()
     }
 
     override fun displayEvent(event: SingleEvent) {
@@ -79,13 +91,8 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
     }
 
     private fun enableLocation(){
-        if(PermissionsManager.areLocationPermissionsGranted(activity?.applicationContext)){
-            initializeLocationEngine()
-            initializeLocationLayer()
-        }else{
-            permissionManager = PermissionsManager(this)
-            permissionManager.requestLocationPermissions(activity)
-        }
+        initializeLocationEngine()
+        initializeLocationLayer()
     }
 
     private fun initializeLocationEngine(){
@@ -110,24 +117,6 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
 
     private fun setCameraPosition(location: Location){
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 13.0))
-    }
-
-    override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
-
-    }
-
-    override fun onPermissionResult(granted: Boolean) {
-       if(granted){
-           enableLocation()
-       }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onLocationChanged(location: Location?) {

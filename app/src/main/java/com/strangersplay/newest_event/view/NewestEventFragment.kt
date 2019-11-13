@@ -73,12 +73,13 @@ class NewestEventFragment : Fragment(), NewestEventView {
     }
 
     private fun onItemClicked(eventId: Int){
-        val singleEventFragment = SingleEventFragment(eventId)
+        var singleEventFragment = SingleEventFragment(eventId)
         fragmentManager?.let{
-            it.beginTransaction()
-
-                .replace(R.id.newestEventFragment,singleEventFragment)
-                .commit()
+            fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, singleEventFragment)?.addToBackStack("newestEvent")
+                ?.commit()
+//            it.beginTransaction()
+//                .replace(R.id.newestEventFragment,singleEventFragment)
+//                .commit()
         }
     }
 }

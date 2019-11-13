@@ -38,7 +38,7 @@ class RegisterPresenter(private val registerView: RegisterView, private val regi
                     }
                 }
             } catch (e: Exception){
-                Log.i("supertest123","registration exception")
+                Log.i("supertest123",e.message)
             }
 
         }

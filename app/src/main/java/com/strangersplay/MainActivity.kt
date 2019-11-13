@@ -14,15 +14,16 @@ import java.security.AccessControlContext
 class MainActivity : AppCompatActivity(), PermissionsListener {
 
     private lateinit var navController: NavController
-    private lateinit var permissionManager: PermissionsManager
+    private var permissionManager: PermissionsManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        permissionManager = PermissionsManager(this)
-        permissionManager.requestLocationPermissions(this)
-
+        if(permissionManager == null) {
+            permissionManager = PermissionsManager(this)
+            permissionManager?.requestLocationPermissions(this)
+        }
         setContentView(R.layout.activity_main)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         navigationBar.setupWithNavController(navController)

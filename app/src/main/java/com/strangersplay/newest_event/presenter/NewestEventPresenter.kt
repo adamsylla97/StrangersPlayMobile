@@ -64,6 +64,7 @@ class NewestEventPresenter(
                         newestEventView.updateList(events.sortedBy {
                             val splittedString = it.eventLocation.split(",")
                             var locationB = Location("B")
+
                             locationB.latitude = splittedString[0].toDouble()
                             locationB.longitude = splittedString[1].toDouble()
 

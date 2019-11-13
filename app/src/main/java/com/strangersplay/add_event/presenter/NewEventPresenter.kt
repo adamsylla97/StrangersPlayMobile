@@ -49,6 +49,7 @@ class NewEventPresenter(
                 Log.i("supertest123", "new  event exception")
                 Log.i("qwert",event.toString())
                 e.message
+                Log.i("supertest123",event.toString())
                 Log.i("supertest123",e.message)
                 e.printStackTrace()
             }

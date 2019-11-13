@@ -28,16 +28,13 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
 import com.strangersplay.add_event.model.NewEventData
-import com.strangersplay.add_event.presenter.NewEventPresenter
 import com.strangersplay.categories.model.Category
 import kotlinx.android.synthetic.main.fragment_add_event.*
-import java.util.*
 
-class NewEventFragment : Fragment(), NewEventView, PermissionsListener, LocationEngineListener, MapboxMap.OnMapClickListener {
+class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, MapboxMap.OnMapClickListener {
 
     private lateinit var mapView: MapView
     private lateinit var map: MapboxMap
-    private lateinit var permissionManager: PermissionsManager
     private lateinit var originLocation: Location
 
     private var locationEngine: LocationEngine? = null
@@ -53,14 +50,12 @@ class NewEventFragment : Fragment(), NewEventView, PermissionsListener, Location
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_add_event, container, false)
     override fun finishAdding() {
-            Log.i("qwerty","exit fragemnt")
             fragmentManager?.popBackStack()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         exitButton.setOnClickListener{
-            Log.i("qwerty","exit fragemnt")
             fragmentManager?.popBackStack()
         }
 
@@ -75,7 +70,6 @@ class NewEventFragment : Fragment(), NewEventView, PermissionsListener, Location
 
         createEventButton.setOnClickListener{
             presenter.setNewEventInfo()
-            Log.i("qwerty","create event")
         }
         presenter.setupSpinner()
         levelSpinner()
@@ -100,7 +94,6 @@ class NewEventFragment : Fragment(), NewEventView, PermissionsListener, Location
 
     override fun setupCategorySpinner(categories: List<Category>) {
 
-        Log.i("qwerty", categories.toString())
         val arrayAdapter = ArrayAdapter(
             this.context!!,
             android.R.layout.simple_spinner_dropdown_item,
@@ -109,7 +102,6 @@ class NewEventFragment : Fragment(), NewEventView, PermissionsListener, Location
 
         categorySpinner.adapter = arrayAdapter
         categorySpinner.onItemSelectedListener = createSpinnerListener()
-        Log.i("qwerty",selectedCategory)
     }
 
     var selectedCategory=""
@@ -145,13 +137,8 @@ class NewEventFragment : Fragment(), NewEventView, PermissionsListener, Location
     }
 
     private fun enableLocation(){
-        if(PermissionsManager.areLocationPermissionsGranted(activity?.applicationContext)){
-            initializeLocationEngine()
-            initializeLocationLayer()
-        }else{
-            permissionManager = PermissionsManager(this)
-            permissionManager.requestLocationPermissions(activity)
-        }
+        initializeLocationEngine()
+        initializeLocationLayer()
     }
 
     private fun initializeLocationEngine(){
@@ -186,24 +173,6 @@ class NewEventFragment : Fragment(), NewEventView, PermissionsListener, Location
         mapMarker = map.addMarker(MarkerOptions().position(point))
 
         Log.d("MapView", "onClick: " + point.latitude.toString() + "," + point.longitude.toString())
-    }
-
-    override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
-
-    }
-
-    override fun onPermissionResult(granted: Boolean) {
-        if(granted){
-            enableLocation()
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        permissionManager.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     override fun onLocationChanged(location: Location?) {
