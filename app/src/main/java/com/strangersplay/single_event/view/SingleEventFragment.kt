@@ -5,17 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.strangersplay.InstanceProvider
 
 import com.strangersplay.R
 import com.strangersplay.single_event.model.SingleEvent
+import com.strangersplay.single_event.model.UsersInEventRecyclerViewAdapter
 import kotlinx.android.synthetic.main.event_item.view.*
 import kotlinx.android.synthetic.main.fragment_single_event.*
 
 class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventView {
 
     private val singleEventPresenter = InstanceProvider.getSingleEventPresenter(this)
+    private val usersAdapter = UsersInEventRecyclerViewAdapter{}
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,10 +32,21 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
         super.onViewCreated(view, savedInstanceState)
 
         singleEventPresenter.displaySingleEvent()
+
+        usersInEvent.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = usersAdapter
+        }
+
     }
 
     override fun getEventId(): Int {
         return eventId
+    }
+
+    override fun updateList(users: List<String>) {
+        usersAdapter.addList(users)
+        usersAdapter.notifyDataSetChanged()
     }
 
     override fun displayEvent(event: SingleEvent) {

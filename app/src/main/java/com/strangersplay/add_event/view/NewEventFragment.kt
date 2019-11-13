@@ -30,19 +30,16 @@ class NewEventFragment : Fragment(), NewEventView {
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_add_event, container, false)
     override fun finishAdding() {
-            Log.i("qwerty","exit fragemnt")
             fragmentManager?.popBackStack()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         exitButton.setOnClickListener{
-            Log.i("qwerty","exit fragemnt")
             fragmentManager?.popBackStack()
         }
         createEventButton.setOnClickListener{
             presenter.setNewEventInfo()
-            Log.i("qwerty","create event")
         }
         presenter.setupSpinner()
         levelSpinner()
