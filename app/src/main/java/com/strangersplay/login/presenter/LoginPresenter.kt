@@ -25,6 +25,9 @@ class LoginPresenter(private val loginView: LoginView, private val loginService:
         ioScope.launch {
             try{
                 val response = loginService.loginToAccount(loginData)
+
+                Log.i("supertest123",response.userId.toString())
+
                 mainScope.launch {
                     if(200 == response.httpCode) {
                         Log.i("supertest123","$response  $loginData")

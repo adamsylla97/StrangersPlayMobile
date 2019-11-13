@@ -64,7 +64,6 @@ class NewEventFragment : Fragment(), NewEventView {
 
     override fun setupCategorySpinner(categories: List<Category>) {
 
-        Log.i("qwerty", categories.toString())
         val arrayAdapter = ArrayAdapter(
             this.context!!,
             android.R.layout.simple_spinner_dropdown_item,
@@ -73,7 +72,6 @@ class NewEventFragment : Fragment(), NewEventView {
 
         categorySpinner.adapter = arrayAdapter
         categorySpinner.onItemSelectedListener = createSpinnerListener()
-        Log.i("qwerty",selectedCategory)
     }
 
     var selectedCategory=""

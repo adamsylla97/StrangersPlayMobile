@@ -26,7 +26,7 @@ class NewestEventFragment : Fragment(), NewestEventView {
         savedInstanceState: Bundle?
     ): View?{
 
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_newest_event, container, false)
     }
 
