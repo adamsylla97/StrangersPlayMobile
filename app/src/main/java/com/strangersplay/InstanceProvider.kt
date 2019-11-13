@@ -1,5 +1,7 @@
 package com.strangersplay
 
+import android.content.Context
+import android.location.LocationManager
 import com.strangersplay.add_event.model.NewEventDataProvider
 import com.strangersplay.add_event.model.NewEventService
 import com.strangersplay.add_event.network.RestNewEventService
@@ -67,11 +69,11 @@ object InstanceProvider {
         return presenter
     }
 
-    fun getNewestEventPresenter(view: NewestEventView): NewestEventPresenter {
+    fun getNewestEventPresenter(view: NewestEventView, locationManager: LocationManager): NewestEventPresenter {
         val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
         val dataProvider = NewestEventDataProvider(rest)
         val service = NewestEventService(dataProvider)
-        val presenter = NewestEventPresenter(service, view)
+        val presenter = NewestEventPresenter(service, view, locationManager)
         return presenter
     }
 

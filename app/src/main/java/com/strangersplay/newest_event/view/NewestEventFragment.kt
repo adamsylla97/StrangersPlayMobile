@@ -1,8 +1,11 @@
 package com.strangersplay.newest_event.view
 
+import android.content.Context
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -13,12 +16,13 @@ import com.strangersplay.categories.view.CategoryFragment
 import com.strangersplay.newest_event.adapters.NewestEventAdapter
 import com.strangersplay.newest_event.model.Event
 import com.strangersplay.newest_event.presenter.FilterOptions
+import com.strangersplay.newest_event.presenter.NewestEventPresenter
 import com.strangersplay.single_event.view.SingleEventFragment
 import kotlinx.android.synthetic.main.fragment_newest_event.*
 
 class NewestEventFragment : Fragment(), NewestEventView {
 
-    private val presenter = InstanceProvider.getNewestEventPresenter(this)
+    private lateinit var presenter: NewestEventPresenter
     private val newestEventAdapter = NewestEventAdapter{onItemClicked(it)}
 
     override fun onCreateView(
@@ -32,6 +36,8 @@ class NewestEventFragment : Fragment(), NewestEventView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        presenter = InstanceProvider.getNewestEventPresenter(this, context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager)
         newestEventsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = newestEventAdapter
