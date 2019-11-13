@@ -5,10 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
 import com.strangersplay.add_event.model.NewEventData
+import com.strangersplay.add_event.presenter.NewEventPresenter
+import com.strangersplay.categories.model.Category
 import kotlinx.android.synthetic.main.fragment_add_event.*
 import kotlinx.android.synthetic.main.fragment_newest_event.*
 import kotlinx.android.synthetic.main.fragment_single_event.*
@@ -25,7 +29,9 @@ class NewEventFragment : Fragment(), NewEventView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_add_event, container, false)
-    override fun finishAdding() { TODO()
+    override fun finishAdding() {
+            Log.i("qwerty","exit fragemnt")
+            fragmentManager?.popBackStack()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,24 +40,75 @@ class NewEventFragment : Fragment(), NewEventView {
             Log.i("qwerty","exit fragemnt")
             fragmentManager?.popBackStack()
         }
-        presenter.setNewEventInfo()
+        createEventButton.setOnClickListener{
+            presenter.setNewEventInfo()
+            Log.i("qwerty","create event")
+        }
+        presenter.setupSpinner()
+        levelSpinner()
     }
 
 
     override fun getEventData(): NewEventData {
         return NewEventData(
-            category="bla",
-            creationTime= Calendar.getInstance().time.toString(),
+            category=selectedCategory,
+            creationTime= "123",
             description =eventDescription.text.toString(),
-            eventLocation = "",
-            eventTime = eventTime.text.toString(),
+            eventLocation = "aaa",
+            eventTime = "123",
             id = 0,
-            level=0,
-            price = 0,
+            level=selectedLevel,
+            price = 5,
             title = eventTitle.text.toString(),
-            username =""
+            username ="janusz"
 
         )
+    }
+
+    override fun setupCategorySpinner(categories: List<Category>) {
+
+        Log.i("qwerty", categories.toString())
+        val arrayAdapter = ArrayAdapter(
+            this.context!!,
+            android.R.layout.simple_spinner_dropdown_item,
+            categories.map { it.type }
+        )
+
+        categorySpinner.adapter = arrayAdapter
+        categorySpinner.onItemSelectedListener = createSpinnerListener()
+        Log.i("qwerty",selectedCategory)
+    }
+
+    var selectedCategory=""
+    private fun createSpinnerListener()=object: AdapterView.OnItemSelectedListener{
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+
+        }
+
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+          selectedCategory=p0?.getItemAtPosition(p2) as String
+        }
+    }
+    var selectedLevel=0
+    private fun createSpinnerListener2()=object: AdapterView.OnItemSelectedListener{
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+
+        }
+
+        override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            selectedLevel=p0?.getItemAtPosition(p2) as Int
+        }
+    }
+
+    fun levelSpinner(){
+        val arrayAdapter2 = ArrayAdapter(
+            this.context!!,
+            android.R.layout.simple_spinner_dropdown_item,
+            (1..5).map { it }
+            )
+        levelSpinner.adapter=arrayAdapter2
+        levelSpinner.onItemSelectedListener=createSpinnerListener2()
+        Log.i("qwerty",selectedLevel.toString())
     }
 
 }

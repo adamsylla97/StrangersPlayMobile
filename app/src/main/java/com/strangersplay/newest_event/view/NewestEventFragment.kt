@@ -2,9 +2,7 @@ package com.strangersplay.newest_event.view
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -14,6 +12,7 @@ import com.strangersplay.add_event.view.NewEventFragment
 import com.strangersplay.categories.view.CategoryFragment
 import com.strangersplay.newest_event.adapters.NewestEventAdapter
 import com.strangersplay.newest_event.model.Event
+import com.strangersplay.newest_event.presenter.FilterOptions
 import com.strangersplay.single_event.view.SingleEventFragment
 import kotlinx.android.synthetic.main.fragment_newest_event.*
 
@@ -25,7 +24,11 @@ class NewestEventFragment : Fragment(), NewestEventView {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_newest_event, container, false)
+    ): View?{
+
+        setHasOptionsMenu(true)
+        return inflater.inflate(R.layout.fragment_newest_event, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,6 +42,23 @@ class NewestEventFragment : Fragment(), NewestEventView {
                 ?.commit()
         }
         presenter.displayNewestEvents()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.filter_menu,menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            when (item.itemId){
+                R.id.nearlest->presenter.filterList(FilterOptions.NEARLEST)
+                R.id.morePeople->presenter.filterList(FilterOptions.MOREPEOPLE)
+                R.id.lessPeople->presenter.filterList(FilterOptions.LESSPEOPLE)
+                R.id.higherPrice->presenter.filterList(FilterOptions.HIGHERPRICE)
+                R.id.lowerPrice->presenter.filterList(FilterOptions.LOWERPRICE)
+
+            }
+        return true
     }
 
     override fun updateList(events: List<Event>) {

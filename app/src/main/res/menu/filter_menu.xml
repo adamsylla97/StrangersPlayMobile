@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/sortBy"
+        android:enabled="false"
+        android:icon="@drawable/ic_cloud_queue_black_24dp"
+        android:title="@string/sort_by" />
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nearlest"
+            android:icon="@drawable/ic_cloud_queue_black_24dp"
+            android:title="@string/the_nearlest" />
+
+        <item
+            android:id="@+id/lowerPrice"
+            android:icon="@drawable/ic_cloud_queue_black_24dp"
+            android:title="@string/lower_price" />
+
+        <item
+            android:id="@+id/higherPrice"
+            android:icon="@drawable/ic_cloud_queue_black_24dp"
+            android:title="@string/higher_price" />
+        <item
+            android:id="@+id/lessPeople"
+            android:icon="@drawable/ic_cloud_queue_black_24dp"
+            android:title="@string/least_people" />
+
+        <item
+            android:id="@+id/morePeople"
+            android:icon="@drawable/ic_cloud_queue_black_24dp"
+            android:title="@string/more_people" />
+    </group>
+</menu>
