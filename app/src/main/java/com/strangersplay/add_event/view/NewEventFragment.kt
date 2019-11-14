@@ -48,7 +48,11 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_add_event, container, false)
+    ): View? {
+        Mapbox.getInstance(activity?.applicationContext!!, getString(R.string.access_token))
+        return inflater.inflate(R.layout.fragment_add_event, container, false)
+    }
+
     override fun finishAdding() {
             fragmentManager?.popBackStack()
     }
@@ -59,7 +63,7 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
             fragmentManager?.popBackStack()
         }
 
-        Mapbox.getInstance(activity?.applicationContext!!, getString(R.string.access_token))
+
         mapView = view?.findViewById(R.id.mapView)!!
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->

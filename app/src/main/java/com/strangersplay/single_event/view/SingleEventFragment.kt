@@ -49,13 +49,13 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Mapbox.getInstance(activity?.applicationContext!!, getString(R.string.access_token))
         return inflater.inflate(R.layout.fragment_single_event, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
-        Mapbox.getInstance(activity?.applicationContext!!, getString(R.string.access_token))
+
         mapView = view?.findViewById(R.id.singleEventMapView)!!
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
