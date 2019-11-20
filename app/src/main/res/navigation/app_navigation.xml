@@ -19,7 +19,7 @@
         tools:layout="@layout/fragment_categories"/>
     <fragment
         android:id="@+id/userProfileFragment"
-        android:name="com.strangersplay.user_profile.view.UserProfileFragment"
+        android:name="com.strangersplay.user_profile.display.view.UserProfileFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" />
 </navigation>

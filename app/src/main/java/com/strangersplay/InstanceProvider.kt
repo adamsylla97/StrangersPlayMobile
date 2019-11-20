@@ -35,11 +35,16 @@ import com.strangersplay.single_event.model.SingleEventService
 import com.strangersplay.single_event.network.RestSingleEventService
 import com.strangersplay.single_event.presenter.SingleEventPresenter
 import com.strangersplay.single_event.view.SingleEventView
-import com.strangersplay.user_profile.model.UserProfileDataProvider
-import com.strangersplay.user_profile.model.UserProfileService
-import com.strangersplay.user_profile.network.RestUserProfileService
-import com.strangersplay.user_profile.presenter.UserProfilePresenter
-import com.strangersplay.user_profile.view.UserProfileView
+import com.strangersplay.user_profile.display.model.UserProfileDataProvider
+import com.strangersplay.user_profile.display.model.UserProfileService
+import com.strangersplay.user_profile.display.network.RestUserProfileService
+import com.strangersplay.user_profile.display.presenter.UserProfilePresenter
+import com.strangersplay.user_profile.display.view.UserProfileView
+import com.strangersplay.user_profile.edit.model.EditUserProfileDataProvider
+import com.strangersplay.user_profile.edit.model.EditUserProfileService
+import com.strangersplay.user_profile.edit.network.RestEditUserProfileService
+import com.strangersplay.user_profile.edit.presenter.EditUserProfilePresenter
+import com.strangersplay.user_profile.edit.view.EditUserProfileView
 
 object InstanceProvider {
 
@@ -48,6 +53,14 @@ object InstanceProvider {
         val dataProvider = UserProfileDataProvider(rest)
         val service = UserProfileService(dataProvider)
         val presenter = UserProfilePresenter(service, view)
+        return presenter
+    }
+
+    fun getEditUserProfilePresenter(view: EditUserProfileView): EditUserProfilePresenter {
+        val rest = RestServiceBuilder.build(RestEditUserProfileService::class.java)
+        val dataProvider = EditUserProfileDataProvider(rest)
+        val service = EditUserProfileService(dataProvider)
+        val presenter = EditUserProfilePresenter(service, view)
         return presenter
     }
 
