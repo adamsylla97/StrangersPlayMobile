@@ -54,4 +54,19 @@ class NewEventPresenter(
             }
         }
     }
+
+    fun setupCalender() {
+        ioScope.launch {
+            mainScope.launch {
+                newEventView.setupCalender()
+            }
+        }
+    }
+    fun setupClock() {
+        ioScope.launch {
+            mainScope.launch {
+                newEventView.setupClock()
+            }
+        }
+    }
 }
