@@ -22,4 +22,13 @@
         android:name="com.strangersplay.user_profile.display.view.UserProfileFragment"
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/editUserProfileFragment"
+        android:name="com.strangersplay.user_profile.edit.view.EditUserProfileFragment"
+        android:label="fragment_edit_user_profile"
+        tools:layout="@layout/fragment_edit_user_profile">
+        <action
+            android:id="@+id/action_editUserProfileFragment_to_newestEventFragment2"
+            app:destination="@+id/userProfileFragment" />
+    </fragment>
 </navigation>

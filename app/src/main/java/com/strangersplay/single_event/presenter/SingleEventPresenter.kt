@@ -1,5 +1,6 @@
 package com.strangersplay.single_event.presenter
 
+import com.strangersplay.Config
 import com.strangersplay.single_event.model.SingleEventService
 import com.strangersplay.single_event.view.SingleEventView
 import kotlinx.coroutines.CoroutineScope
@@ -23,6 +24,20 @@ class SingleEventPresenter(private val singleEventService: SingleEventService, p
             mainScope.launch {
                 singleEventView.displayEvent(singleEventInformation)
             }
+        }
+    }
+
+    fun joinToEvent() {
+        ioScope.launch {
+            val eventId = singleEventView.getEventId()
+            singleEventService.joinToEvent(eventId, Config.userToken)
+        }
+    }
+
+    fun leaveEvent() {
+        ioScope.launch {
+            val eventId = singleEventView.getEventId()
+            singleEventService.leaveFromEvent(eventId, Config.userToken)
         }
     }
 }

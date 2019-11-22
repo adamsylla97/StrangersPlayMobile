@@ -1,5 +1,6 @@
 package com.strangersplay.user_profile.display.presenter
 
+import com.strangersplay.Config
 import com.strangersplay.user_profile.display.model.UserData
 import com.strangersplay.user_profile.display.model.UserProfileService
 import com.strangersplay.user_profile.display.view.UserProfileView

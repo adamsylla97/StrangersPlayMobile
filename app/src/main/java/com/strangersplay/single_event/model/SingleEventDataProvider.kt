@@ -8,4 +8,12 @@ class SingleEventDataProvider(private val restSingleEventService: RestSingleEven
         return restSingleEventService.fetchSingleEventInfo(id)
     }
 
+    suspend fun joinToEvent(eventId: Int, userToken: Int) {
+        restSingleEventService.joinToEvent(eventId, userToken)
+    }
+
+    suspend fun leaveFromEvent(eventId: Int, userToken: Int) {
+        restSingleEventService.leaveFromEvent(eventId, userToken)
+    }
+
 }

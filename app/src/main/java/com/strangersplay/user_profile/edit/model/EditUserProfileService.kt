@@ -4,8 +4,8 @@ import com.strangersplay.user_profile.display.model.UserData
 
 class EditUserProfileService(private val editUserProfileDataProvider: EditUserProfileDataProvider) {
 
-    suspend fun updateUser(userData: UserData){
-        return editUserProfileDataProvider.mockedUpdateData(userData)
+    suspend fun updateUser(profileId: Int, updatedUserInformation: UpdatedUserInformation){
+        return editUserProfileDataProvider.updateUserData(profileId, updatedUserInformation)
     }
 
 }
