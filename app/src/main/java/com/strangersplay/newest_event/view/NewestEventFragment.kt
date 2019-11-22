@@ -44,8 +44,7 @@ class NewestEventFragment : Fragment(), NewestEventView {
         }
         addButton.setOnClickListener{
             addButton.hide()
-            fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, NewEventFragment())?.addToBackStack("newestEvent")
-                ?.commit()
+            fragmentManager?.beginTransaction()?.replace(R.id.newestEventFragment,NewEventFragment())?.addToBackStack("newEventTag")?.commit()
         }
         presenter.displayNewestEvents()
     }
