@@ -289,8 +289,8 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
         mapView.onStop()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         locationEngine?.deactivate()
         mapView.onDestroy()
     }
