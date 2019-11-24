@@ -6,7 +6,7 @@ import retrofit2.http.Path
 
 interface RestUserProfileService {
 
-    @GET("/advertisement/{profileId}")
+    @GET("/user/{profileId}")
     suspend fun fetchUserProfileData(@Path("profileId") profileId: Int): UserData
 
 }

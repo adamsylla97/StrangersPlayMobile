@@ -42,15 +42,9 @@ class NewEventPresenter(
             try {
                 val response = newEventService.newEventData(event)
                 if (201 == response.httpCode) {
-                    Log.i("supertest123", "adding event finish succesfully")
                     newEventView.finishAdding()
                 }
             } catch (e: Exception) {
-                Log.i("supertest123", "new  event exception")
-                Log.i("qwert",event.toString())
-                e.message
-                Log.i("supertest123",event.toString())
-                Log.i("supertest123",e.message)
                 e.printStackTrace()
             }
         }

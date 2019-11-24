@@ -7,7 +7,7 @@ data class UserData(val firstName: String?,
                     val lastName: String?,
                     val emailAdress: String?,
                     val level: String?,
-                    val about: String?,
+                    val description: String?,
                     val photo: String?,
                     val comments: List<Comment>?) : Parcelable {
 
@@ -26,7 +26,7 @@ data class UserData(val firstName: String?,
         parcel.writeString(lastName)
         parcel.writeString(emailAdress)
         parcel.writeString(level)
-        parcel.writeString(about)
+        parcel.writeString(description)
         parcel.writeString(photo)
         parcel.writeTypedList(comments)
     }

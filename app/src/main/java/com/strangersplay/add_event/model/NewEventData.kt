@@ -12,6 +12,5 @@ data class NewEventData(
     val level: Int,
     val price: Int,
     val title: String,
-    val userIdsList: List<UserIds>,
     val userLimit: Int
 )

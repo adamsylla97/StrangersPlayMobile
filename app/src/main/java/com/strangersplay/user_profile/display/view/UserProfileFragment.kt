@@ -1,7 +1,9 @@
 package com.strangersplay.user_profile.display.view
 
 
+import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -36,6 +38,10 @@ class UserProfileFragment : Fragment(), UserProfileView {
             adapter = userProfileAdapter
         }
 
+        if(userId != Config.userToken){
+            updateProfile.visibility = View.GONE
+        }
+
         presenter.displayUserInformation()
 
         updateProfile.setOnClickListener {
@@ -58,10 +64,17 @@ class UserProfileFragment : Fragment(), UserProfileView {
         Glide.with(this).load(profileInformation.photo).placeholder(R.drawable.ic_alien_head).into(userProfilePhoto)
         eventRatingBar.rating = profileInformation.level!!.toFloat()
         userNameTV.text = "${profileInformation.firstName}  ${profileInformation.lastName}"
-        userInformation.text = profileInformation.about
+        userInformation.text = profileInformation.description
 
-        userProfileAdapter.addList(profileInformation.comments!!)
+        userProfileAdapter.addList(profileInformation.comments ?: emptyList())
         userProfileAdapter.notifyDataSetChanged()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        Log.i("supertest123","hello again world!")
+        presenter.displayUserInformation()
     }
 
     override fun getUserId(): Int {
@@ -72,4 +85,15 @@ class UserProfileFragment : Fragment(), UserProfileView {
         }
     }
 
+    companion object{
+        fun newInstance(userId: Int): UserProfileFragment {
+            val fragment = UserProfileFragment()
+
+            val bundle = Bundle()
+            bundle.putInt("userId",userId)
+            fragment.arguments = bundle
+
+            return fragment
+        }
+    }
 }

@@ -23,11 +23,20 @@
         android:label="fragment_user_profile"
         tools:layout="@layout/fragment_user_profile" />
     <fragment
-        android:id="@+id/newEventFragment2"
-        android:name="com.strangersplay.add_event.view.NewEventFragment"
-        android:label="NewEventFragment" >
+        android:id="@+id/editUserProfileFragment"
+        android:name="com.strangersplay.user_profile.edit.view.EditUserProfileFragment"
+        android:label="fragment_edit_user_profile"
+        tools:layout="@layout/fragment_edit_user_profile">
         <action
-            android:id="@+id/action_newEventFragment2_to_newestEventFragment"
-            app:destination="@id/newestEventFragment" />
+            android:id="@+id/action_editUserProfileFragment_to_newestEventFragment2"
+            app:destination="@+id/userProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newEventFragment"
+        android:name="com.strangersplay.add_event.view.NewEventFragment"
+        android:label="NewEventFragment">
+        <action
+            android:id="@+id/action_new_to_newest"
+            app:popUpTo="@+id/newestEventFragment"/>
     </fragment>
 </navigation>

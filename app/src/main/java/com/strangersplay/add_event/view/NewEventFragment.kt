@@ -113,7 +113,6 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
             level = selectedLevel,
             price = Integer.parseInt(price.text.toString()),
             title = eventTitle.text.toString(),
-            userIdsList = listOf(UserIds(0,0,"")),
             userLimit = Integer.parseInt(userLimit.text.toString())
         )
     }
