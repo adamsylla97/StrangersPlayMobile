@@ -1,6 +1,7 @@
 package com.strangersplay.user_profile.display.view
 
 
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -35,6 +36,10 @@ class UserProfileFragment : Fragment(), UserProfileView {
         userComments.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = userProfileAdapter
+        }
+
+        if(userId != Config.userToken){
+            updateProfile.visibility = View.GONE
         }
 
         presenter.displayUserInformation()
@@ -77,6 +82,18 @@ class UserProfileFragment : Fragment(), UserProfileView {
             return Config.userToken
         } else {
             return userId
+        }
+    }
+
+    companion object{
+        fun newInstance(userId: Int): UserProfileFragment {
+            val fragment = UserProfileFragment()
+
+            val bundle = Bundle()
+            bundle.putInt("userId",userId)
+            fragment.arguments = bundle
+
+            return fragment
         }
     }
 }

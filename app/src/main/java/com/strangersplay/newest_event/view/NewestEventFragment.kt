@@ -40,8 +40,7 @@ class NewestEventFragment : Fragment(), NewestEventView {
         }
         addButton.setOnClickListener{
             addButton.hide()
-            fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, NewEventFragment())?.addToBackStack("newestEvent")
-                ?.commit()
+            fragmentManager?.beginTransaction()?.replace(R.id.newestEventFragment,NewEventFragment())?.addToBackStack("newEventTag")?.commit()
         }
         presenter.displayNewestEvents()
     }
@@ -73,9 +72,6 @@ class NewestEventFragment : Fragment(), NewestEventView {
         fragmentManager?.let{
             fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, singleEventFragment)?.addToBackStack("newestEvent")
                 ?.commit()
-//            it.beginTransaction()
-//                .replace(R.id.newestEventFragment,singleEventFragment)
-//                .commit()
         }
     }
 }

@@ -2,12 +2,11 @@ package com.strangersplay.single_event.view
 
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mapbox.android.core.location.LocationEngine
@@ -27,8 +26,10 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode
 import com.strangersplay.InstanceProvider
 
 import com.strangersplay.R
+import com.strangersplay.single_event.adapter.UsersInEventRecyclerViewAdapter
 import com.strangersplay.single_event.model.SingleEvent
-import com.strangersplay.single_event.model.UsersInEventRecyclerViewAdapter
+import com.strangersplay.single_event.model.UserIds
+import com.strangersplay.user_profile.display.view.UserProfileFragment
 import kotlinx.android.synthetic.main.fragment_single_event.*
 
 class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventView, LocationEngineListener {
@@ -42,7 +43,7 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
 
     private val singleEventPresenter = InstanceProvider.getSingleEventPresenter(this)
 
-    private val usersAdapter = UsersInEventRecyclerViewAdapter{}
+    private val usersAdapter = UsersInEventRecyclerViewAdapter {onItemClicked(it)}
 
 
     override fun onCreateView(
@@ -72,12 +73,12 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
 
         joinButton.setOnClickListener {
             singleEventPresenter.joinToEvent()
-            Navigation.findNavController(it).navigateUp()
+            //fragmentManager?.popBackStack()
         }
 
         exitButton.setOnClickListener {
             singleEventPresenter.leaveEvent()
-            Navigation.findNavController(it).navigateUp()
+            //fragmentManager?.popBackStack()
         }
 
 
@@ -87,7 +88,7 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
         return eventId
     }
 
-    override fun updateList(users: List<String>) {
+    override fun updateList(users: List<UserIds>) {
         usersAdapter.addList(users)
         usersAdapter.notifyDataSetChanged()
     }
@@ -106,6 +107,14 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
     private fun enableLocation(){
         initializeLocationEngine()
         initializeLocationLayer()
+    }
+
+    private fun onItemClicked(userId: Int){
+        val userProfileFragment = UserProfileFragment.newInstance(userId)
+        fragmentManager?.let{
+            fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, userProfileFragment)?.addToBackStack("profile")
+                ?.commit()
+        }
     }
 
     private fun initializeLocationEngine(){
@@ -130,6 +139,10 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
 
     private fun setCameraPosition(location: Location){
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 13.0))
+    }
+
+    override fun displayToast(msg: String) {
+        Toast.makeText(this.context, msg, Toast.LENGTH_LONG).show()
     }
 
     override fun onLocationChanged(location: Location?) {
@@ -173,6 +186,7 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
         super.onDestroy()
         locationEngine?.deactivate()
         mapView.onDestroy()
+        singleEventPresenter.finishThreads()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
