@@ -6,10 +6,8 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
-import com.strangersplay.Config
 import com.strangersplay.joined_events.view.JoinedEventView
 import com.strangersplay.newest_event.model.NewestEventService
-import com.strangersplay.newest_event.model.UserIds
 import com.strangersplay.newest_event.presenter.FilterOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -48,10 +46,7 @@ class JoinedEventPresenter(private val newestEventService: NewestEventService,
 
     fun filterList(filterOptions: FilterOptions) {
         ioScope.launch {
-            val eventsList = newestEventService.getNewestItems()
-            val events = eventsList.filter{ it.authorId == Config.userToken ||
-                    it.userIdsList.contains(UserIds(Config.userToken))  }
-
+            val events = newestEventService.getNewestItems()
             mainScope.launch {
                 when (filterOptions) {
                     FilterOptions.NEARLEST -> {
