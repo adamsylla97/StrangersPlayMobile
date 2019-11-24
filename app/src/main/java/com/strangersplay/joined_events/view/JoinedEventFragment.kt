@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.strangersplay.R
+import com.strangersplay.newest_event.model.Event
 
 class JoinedEventFragment : Fragment(), JoinedEventView {
 
@@ -19,5 +20,7 @@ class JoinedEventFragment : Fragment(), JoinedEventView {
         return inflater.inflate(R.layout.fragment_joined_event, container, false)
     }
 
-
+    override fun updateList(event: Event) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 }

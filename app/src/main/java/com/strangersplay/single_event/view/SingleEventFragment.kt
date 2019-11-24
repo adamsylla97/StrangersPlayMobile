@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mapbox.android.core.location.LocationEngine
@@ -30,6 +31,7 @@ import com.strangersplay.single_event.adapter.UsersInEventRecyclerViewAdapter
 import com.strangersplay.single_event.model.SingleEvent
 import com.strangersplay.single_event.model.UserIds
 import com.strangersplay.user_profile.display.view.UserProfileFragment
+import kotlinx.android.synthetic.main.fragment_add_event.view.*
 import kotlinx.android.synthetic.main.fragment_single_event.*
 
 class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventView, LocationEngineListener {
@@ -184,9 +186,13 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
 
     override fun onDestroy() {
         super.onDestroy()
+        singleEventPresenter.finishThreads()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
         locationEngine?.deactivate()
         mapView.onDestroy()
-        singleEventPresenter.finishThreads()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
