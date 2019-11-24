@@ -12,6 +12,8 @@ import com.strangersplay.categories.model.CategoryService
 import com.strangersplay.categories.network.RestCategoryService
 import com.strangersplay.categories.presenter.CategoryPresenter
 import com.strangersplay.categories.view.CategoryView
+import com.strangersplay.joined_events.presenter.JoinedEventPresenter
+import com.strangersplay.joined_events.view.JoinedEventView
 import com.strangersplay.login.model.LoginDataProvider
 import com.strangersplay.login.model.LoginService
 import com.strangersplay.login.network.RestLoginService
@@ -130,6 +132,15 @@ object InstanceProvider {
         val service = NewEventService(dataProvider)
         val presenter = NewEventPresenter(view,service)
         return presenter
+    }
+
+    fun getJoinedEventPresenter(view: JoinedEventView, locationManager: LocationManager): JoinedEventPresenter {
+        val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
+        val dataProvider = NewestEventDataProvider(rest)
+        val service = NewestEventService(dataProvider)
+        val presenter = JoinedEventPresenter(service, view, locationManager)
+        return presenter
+    }
           }
 
     fun getEndedEventPresenter(view: NewestEventView,locationManager: LocationManager): EndedEventsPresenter {
