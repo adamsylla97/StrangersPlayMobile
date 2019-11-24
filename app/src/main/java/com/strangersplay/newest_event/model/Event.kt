@@ -12,6 +12,6 @@ data class Event(
     val level: Int,
     val price: Double,
     val title: String,
-    val userIdsList: List<Any>,
+    val userIdsList: List<UserIds>,
     val userLimit: Int
 )

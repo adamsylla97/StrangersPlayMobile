@@ -100,9 +100,18 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
         Glide.with(this).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(eventImage)
         eventRatingBar.numStars = event.level
         eventContributionTextView.text = event.price.toString()
-        val position = event.eventLocation.split(",")
-        if(position.size == 2) {
-            map.addMarker(MarkerOptions().position(LatLng(position[0].toDouble(), position[1].toDouble())))
+        if(event.eventLocation != "null,null") {
+            val position = event.eventLocation.split(",")
+            if (position.size == 2) {
+                map.addMarker(
+                    MarkerOptions().position(
+                        LatLng(
+                            position[0].toDouble(),
+                            position[1].toDouble()
+                        )
+                    )
+                )
+            }
         }
     }
 
@@ -114,7 +123,7 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
     private fun onItemClicked(userId: Int){
         val userProfileFragment = UserProfileFragment.newInstance(userId)
         fragmentManager?.let{
-            fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, userProfileFragment)?.addToBackStack("profile")
+            fragmentManager?.beginTransaction()?.add(R.id.singleEventFragment, userProfileFragment)?.addToBackStack("profile")
                 ?.commit()
         }
     }

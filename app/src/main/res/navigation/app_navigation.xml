@@ -37,6 +37,11 @@
         android:label="NewEventFragment">
         <action
             android:id="@+id/action_new_to_newest"
-            app:popUpTo="@+id/newestEventFragment"/>
+            app:popUpTo="@+id/newestEventFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/joinedEventFragment"
+        android:name="com.strangersplay.joined_events.view.JoinedEventFragment"
+        android:label="fragment_joined_event"
+        tools:layout="@layout/fragment_joined_event" />
 </navigation>
