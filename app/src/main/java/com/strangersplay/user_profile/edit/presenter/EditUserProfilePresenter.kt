@@ -1,5 +1,6 @@
 package com.strangersplay.user_profile.edit.presenter
 
+import com.strangersplay.Config
 import com.strangersplay.user_profile.edit.model.EditUserProfileService
 import com.strangersplay.user_profile.edit.view.EditUserProfileView
 import kotlinx.coroutines.CoroutineScope
@@ -23,11 +24,7 @@ class EditUserProfilePresenter(private val editUserProfileService: EditUserProfi
         ioScope.launch {
 
             val updatedUserInformation = editUserProfileView.getUpdatedUser()
-            editUserProfileService.updateUser(updatedUserInformation)
-
-            mainScope.launch {
-                editUserProfileView.closeFragment()
-            }
+            editUserProfileService.updateUser(Config.userToken, updatedUserInformation)
 
         }
 

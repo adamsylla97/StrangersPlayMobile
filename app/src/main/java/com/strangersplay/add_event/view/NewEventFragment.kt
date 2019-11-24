@@ -6,14 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineListener
 import com.mapbox.android.core.location.LocationEnginePriority
 import com.mapbox.android.core.location.LocationEngineProvider
-import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
 import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.annotations.Marker
@@ -27,9 +24,17 @@ import com.mapbox.mapboxsdk.plugins.locationlayer.modes.CameraMode
 import com.mapbox.mapboxsdk.plugins.locationlayer.modes.RenderMode
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
-import com.strangersplay.add_event.model.NewEventData
 import com.strangersplay.categories.model.Category
 import kotlinx.android.synthetic.main.fragment_add_event.*
+import kotlinx.android.synthetic.main.fragment_single_event.*
+import java.util.*
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.widget.*
+import androidx.navigation.Navigation
+import com.strangersplay.add_event.model.NewEventData
+import com.strangersplay.add_event.model.UserIds
+import com.strangersplay.newest_event.view.NewestEventFragment
 
 class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, MapboxMap.OnMapClickListener {
 
@@ -59,11 +64,10 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        exitButton.setOnClickListener{
-            fragmentManager?.popBackStack()
+        exitAddButton.setOnClickListener{
+            Log.i("qwerty","exit fragemnt")
+            fragmentManager?.beginTransaction()?.replace(R.id.newestEventFragment,NewestEventFragment())?.commit()
         }
-
-
         mapView = view?.findViewById(R.id.mapView)!!
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
@@ -72,8 +76,24 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
             enableLocation()
         }
 
-        createEventButton.setOnClickListener{
-            presenter.setNewEventInfo()
+        createEventButton.setOnClickListener {
+            if (eventTitle.text.isNullOrEmpty() || price.text.isNullOrEmpty() ||
+                eventDescription.text.isNullOrEmpty()||mapMarker?.position?.latitude.toString().isNullOrEmpty()||mapMarker?.position?.longitude.toString().isNullOrEmpty()
+                || years.isNullOrEmpty()||month.isNullOrEmpty()||minute.isNullOrEmpty()||hour.isNullOrEmpty()||day.isNullOrEmpty()|| userLimit.text.isNullOrEmpty()) {
+                Toast.makeText(newEventFragment.context,"Please fill all fields correctly.",Toast.LENGTH_SHORT).show()
+            }else{
+                presenter.setNewEventInfo()
+                fragmentManager?.beginTransaction()?.replace(R.id.newestEventFragment,NewestEventFragment())?.commit()
+                Log.i("qwerty", "create event")}
+        }
+        eventTimeDay.setOnClickListener {
+            Log.i("qwerty", "set day")
+            presenter.setupCalender()
+
+        }
+        eventTimeHours.setOnClickListener {
+            Log.i("qwerty", "set hours")
+            presenter.setupClock()
         }
         presenter.setupSpinner()
         levelSpinner()
@@ -82,22 +102,22 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
 
     override fun getEventData(): NewEventData {
         return NewEventData(
-            category=selectedCategory,
-            creationTime= "123",
+            authorId = 0,
+            category = selectedCategory,
+            creationTime= "2019-11-20T17:09:00.931Z",
             description =eventDescription.text.toString(),
             eventLocation = mapMarker?.position?.latitude.toString() + "," + mapMarker?.position?.longitude.toString(),
-            eventTime = "123",
+            eventTime = "$years-$month-$day  $hour:$minute" ,
             id = 0,
-            level=selectedLevel,
-            price = 5,
+            image = listOf(""),
+            level = selectedLevel,
+            price = Integer.parseInt(price.text.toString()),
             title = eventTitle.text.toString(),
-            username ="janusz"
-
+            userLimit = Integer.parseInt(userLimit.text.toString())
         )
     }
 
     override fun setupCategorySpinner(categories: List<Category>) {
-
         val arrayAdapter = ArrayAdapter(
             this.context!!,
             android.R.layout.simple_spinner_dropdown_item,
@@ -108,36 +128,89 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
         categorySpinner.onItemSelectedListener = createSpinnerListener()
     }
 
-    var selectedCategory=""
-    private fun createSpinnerListener()=object: AdapterView.OnItemSelectedListener{
+    var selectedCategory = ""
+    private fun createSpinnerListener() = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(p0: AdapterView<*>?) {
 
         }
 
         override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+            selectedCategory = p0?.getItemAtPosition(p2) as String
             selectedCategory=p0?.getItemAtPosition(p2) as String
         }
     }
-    var selectedLevel=0
-    private fun createSpinnerListener2()=object: AdapterView.OnItemSelectedListener{
+
+    var selectedLevel = 0
+    private fun createSpinnerListener2() = object : AdapterView.OnItemSelectedListener {
         override fun onNothingSelected(p0: AdapterView<*>?) {
 
         }
 
         override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-            selectedLevel=p0?.getItemAtPosition(p2) as Int
+            selectedLevel = p0?.getItemAtPosition(p2) as Int
         }
     }
 
-    fun levelSpinner(){
+    fun levelSpinner() {
         val arrayAdapter2 = ArrayAdapter(
             this.context!!,
             android.R.layout.simple_spinner_dropdown_item,
             (1..5).map { it }
         )
-        levelSpinner.adapter=arrayAdapter2
-        levelSpinner.onItemSelectedListener=createSpinnerListener2()
-        Log.i("qwerty",selectedLevel.toString())
+        levelSpinner.adapter = arrayAdapter2
+        levelSpinner.onItemSelectedListener = createSpinnerListener2()
+    }
+
+    var day=""
+    var month=""
+    var years=""
+    var minute=""
+    var hour=""
+
+    var calendar = Calendar.getInstance()
+    override fun setupCalender() {
+        DatePickerDialog(
+            this.context!!,
+            dateSetListener,
+            // set DatePickerDialog to point to today's date when it loads up
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        ).show()
+    }
+    override fun setupClock() {
+        TimePickerDialog(
+            this.context!!,
+            timeSetListener,
+            calendar.get(Calendar.HOUR_OF_DAY),
+            calendar.get(Calendar.MINUTE),
+            true
+        ).show()
+    }
+
+    val timeSetListener = object : TimePickerDialog.OnTimeSetListener {
+        override fun onTimeSet(
+            view: TimePicker, hours: Int, minutes: Int) {
+            calendar.set(Calendar.HOUR_OF_DAY,hours).toString()
+            calendar.set(Calendar.MINUTE,minutes).toString()
+            hour= calendar.time.hours.toString()
+            minute = calendar.time.minutes.toString()
+            eventTimeHours.setText(hour+":" +minute)
+        }
+    }
+    val dateSetListener = object : DatePickerDialog.OnDateSetListener {
+        override fun onDateSet(
+            view: DatePicker, year: Int, monthOfYear: Int,
+            dayOfMonth: Int
+        ) {
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, monthOfYear)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            years = (Integer.parseInt(calendar.time.year.toString()) + 1900).toString()
+            month= calendar.time.month.toString()
+            day = calendar.time.date.toString()
+            eventTimeDay.setText(years+"/"+month+"/ "+day)
+        }
     }
 
     private fun enableLocation(){
@@ -234,4 +307,5 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
         mapView.onLowMemory()
     }
 }
+
 

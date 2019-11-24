@@ -35,7 +35,7 @@ class NewestEventAdapter(private val listener: (Int) -> Unit): RecyclerView.Adap
     class EventsHolder(private val view: View, private val itemClick: (eventId: Int) -> Unit):RecyclerView.ViewHolder(view){
         fun bind(event: Event){
             view.eventTitle.text = event.title
-            view.eventPrice.text = event.price.toString()
+            view.eventPrice.text = event.price.toString() + " zł"
             view.eventTime.text = event.eventTime
             view.eventRating.text = event.level.toString()+"/5"
 

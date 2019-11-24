@@ -1,6 +1,7 @@
 package com.strangersplay.login.presenter
 
 import android.util.Log
+import com.strangersplay.Config
 import com.strangersplay.login.model.LoginService
 import com.strangersplay.login.view.LoginView
 import kotlinx.coroutines.CoroutineScope
@@ -27,6 +28,7 @@ class LoginPresenter(private val loginView: LoginView, private val loginService:
                 val response = loginService.loginToAccount(loginData)
 
                 Log.i("supertest123",response.userId.toString())
+                Config.userToken = response.userId
 
                 mainScope.launch {
                     if(200 == response.httpCode) {

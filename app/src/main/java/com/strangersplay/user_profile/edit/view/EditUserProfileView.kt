@@ -5,7 +5,7 @@ import com.strangersplay.user_profile.edit.model.UpdatedUserInformation
 
 interface EditUserProfileView {
 
-    fun getUpdatedUser(): UserData
+    fun getUpdatedUser(): UpdatedUserInformation
     fun closeFragment()
 
 }

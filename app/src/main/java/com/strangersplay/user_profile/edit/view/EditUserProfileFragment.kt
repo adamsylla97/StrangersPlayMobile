@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
 import com.strangersplay.user_profile.display.model.UserData
+import com.strangersplay.user_profile.edit.model.UpdatedUserInformation
 import kotlinx.android.synthetic.main.fragment_edit_user_profile.*
 
 class EditUserProfileFragment : Fragment(), EditUserProfileView {
@@ -28,11 +31,12 @@ class EditUserProfileFragment : Fragment(), EditUserProfileView {
 
         updateButton.setOnClickListener {
             presenter.updateUser()
+            Navigation.findNavController(it).navigateUp()
         }
 
     }
 
-    override fun getUpdatedUser(): UserData {
+    override fun getUpdatedUser(): UpdatedUserInformation {
         var firstName = ""
         if(firstNameEditText.text.toString() != ""){
             firstName = firstNameEditText.text.toString()
@@ -51,11 +55,11 @@ class EditUserProfileFragment : Fragment(), EditUserProfileView {
         if(aboutEditText.text.toString() != ""){
             about = aboutEditText.text.toString()
         } else {
-            about = userData.about!!
+            about = userData.description!!
         }
 
-        return UserData(
-            firstName,lastName,userData.emailAdress, userData.level!!, about, userData.photo, userData.comments
+        return UpdatedUserInformation(
+            firstName,lastName,about
         )
     }
 
