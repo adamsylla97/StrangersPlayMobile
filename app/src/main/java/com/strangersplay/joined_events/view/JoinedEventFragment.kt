@@ -62,7 +62,8 @@ class JoinedEventFragment : Fragment(), JoinedEventView {
     }
 
     override fun updateList(events: List<Event>) {
-        val eventsList = events.filter{ it.userIdsList.contains(UserIds(Config.userToken))  }
+        val eventsList = events.filter{ it.authorId == Config.userToken ||
+                it.userIdsList.contains(UserIds(Config.userToken))    }
         newestEventAdapter.addList(eventsList)
         newestEventAdapter.notifyDataSetChanged()
     }
