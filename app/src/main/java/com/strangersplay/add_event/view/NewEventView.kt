@@ -5,7 +5,6 @@ import com.strangersplay.categories.model.Category
 
 interface NewEventView {
     fun getEventData(): NewEventData
-    fun finishAdding()
     fun setupCategorySpinner(categories: List<Category>)
     fun setupCalender()
     fun setupClock()

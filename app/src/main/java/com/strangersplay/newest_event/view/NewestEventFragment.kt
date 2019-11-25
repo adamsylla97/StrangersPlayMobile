@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
-import com.strangersplay.add_event.view.NewEventFragment
 import com.strangersplay.newest_event.adapters.NewestEventAdapter
 import com.strangersplay.newest_event.model.Event
 import com.strangersplay.newest_event.presenter.FilterOptions
@@ -38,10 +37,6 @@ class NewestEventFragment : Fragment(), NewestEventView {
             layoutManager = LinearLayoutManager(context)
             adapter = newestEventAdapter
         }
-        addButton.setOnClickListener{
-            addButton.hide()
-            fragmentManager?.beginTransaction()?.replace(R.id.newestEventFragment,NewEventFragment())?.addToBackStack("newEventTag")?.commit()
-        }
         presenter.displayNewestEvents()
     }
 
@@ -52,12 +47,14 @@ class NewestEventFragment : Fragment(), NewestEventView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
             when (item.itemId){
+                R.id.yours->presenter.filterList(FilterOptions.YOURS)
                 R.id.nearlest->presenter.filterList(FilterOptions.NEARLEST)
                 R.id.morePeople->presenter.filterList(FilterOptions.MOREPEOPLE)
                 R.id.lessPeople->presenter.filterList(FilterOptions.LESSPEOPLE)
                 R.id.higherPrice->presenter.filterList(FilterOptions.HIGHERPRICE)
                 R.id.lowerPrice->presenter.filterList(FilterOptions.LOWERPRICE)
-
+                R.id.higherLevel->presenter.filterList(FilterOptions.HIGHERLEVEL)
+                R.id.lowerLevel->presenter.filterList(FilterOptions.LOWERLEVEL)
             }
         return true
     }

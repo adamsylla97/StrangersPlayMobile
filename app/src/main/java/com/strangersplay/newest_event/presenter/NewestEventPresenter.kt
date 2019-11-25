@@ -2,16 +2,20 @@ package com.strangersplay.newest_event.presenter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.core.util.rangeTo
 import com.mapbox.android.core.location.LocationEngine
 import com.mapbox.android.core.location.LocationEngineListener
 import com.mapbox.android.core.location.LocationEnginePriority
 import com.mapbox.android.core.location.LocationEngineProvider
+import com.strangersplay.Config
+import com.strangersplay.newest_event.model.Event
 import com.strangersplay.newest_event.model.NewestEventService
 import com.strangersplay.newest_event.view.NewestEventView
 import kotlinx.coroutines.CoroutineScope
@@ -25,7 +29,7 @@ class NewestEventPresenter(
     private val newestEventService: NewestEventService,
     private val newestEventView: NewestEventView,
     private val locationManager: LocationManager
-): LocationListener {
+) : LocationListener {
 
     private val job = Job()
 
@@ -41,7 +45,7 @@ class NewestEventPresenter(
 
     @SuppressLint("MissingPermission")
     fun displayNewestEvents() {
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0.1f,this)
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0.1f, this)
 
         ioScope.launch {
             val events = newestEventService.getNewestItems()
@@ -57,6 +61,20 @@ class NewestEventPresenter(
             val events = newestEventService.getNewestItems()
             mainScope.launch {
                 when (filterOptions) {
+                    FilterOptions.YOURS -> {
+                        val tempEvents = mutableListOf<Event>()
+                        events.forEach {
+                            if (it.userIdsList.isNotEmpty()) {
+                                for (x in it.userIdsList.size-1 downTo 0 step 1) {
+                                    if (
+                                        it.userIdsList[x].userId == Config.userToken
+                                    ) tempEvents.add(it)
+                                }
+                            }
+                        }
+                        newestEventView.updateList(tempEvents)
+                        Log.i("qwerty123", tempEvents.toString())
+                    }
                     FilterOptions.NEARLEST -> {
                         var locationA = Location("A")
                         locationA.latitude = lat
@@ -72,19 +90,33 @@ class NewestEventPresenter(
                         })
                     }
                     FilterOptions.MOREPEOPLE -> {
-                        newestEventView.updateList(events)
+                        newestEventView.updateList(events.sortedByDescending {
+                            it.userLimit - it.userIdsList.size
+                        })
                     }
                     FilterOptions.LESSPEOPLE -> {
-                        newestEventView.updateList(events)
+                        newestEventView.updateList(events.sortedBy {
+                            it.userLimit - it.userIdsList.size
+                        })
                     }
                     FilterOptions.HIGHERPRICE -> {
-                        newestEventView.updateList(events.sortedBy {
+                        newestEventView.updateList(events.sortedByDescending {
                             it.price
                         })
                     }
                     FilterOptions.LOWERPRICE -> {
-                        newestEventView.updateList(events.sortedByDescending {
+                        newestEventView.updateList(events.sortedBy {
                             it.price
+                        })
+                    }
+                    FilterOptions.HIGHERLEVEL -> {
+                        newestEventView.updateList(events.sortedByDescending {
+                            it.level
+                        })
+                    }
+                    FilterOptions.LOWERLEVEL -> {
+                        newestEventView.updateList(events.sortedBy {
+                            it.level
                         })
                     }
                 }
