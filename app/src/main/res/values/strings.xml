@@ -38,4 +38,9 @@
     <string name="number_of_sought">Number of sought players</string>
     <string name="set_event_day">Set event day</string>
     <string name="set_event_hours">Set event hours</string>
+    <string name="add_event">Add event</string>
+    <string name="from_weaker_to_stronger_players">From weaker to stronger players</string>
+    <string name="from_stronger_to_weaker_players">From stronger to weaker players</string>
+    <string name="events_in_which_you_participate">Events in which you participate</string>
+    <string name="joined_events">Joined events</string>
 </resources>

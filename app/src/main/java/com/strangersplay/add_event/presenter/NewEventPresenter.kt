@@ -38,11 +38,11 @@ class NewEventPresenter(
 
     fun setNewEventInfo() {
         val event = newEventView.getEventData()
+        Log.i("qwerty","added")
         ioScope.launch {
             try {
                 val response = newEventService.newEventData(event)
                 if (201 == response.httpCode) {
-                    newEventView.finishAdding()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

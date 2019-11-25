@@ -8,6 +8,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/yours"
+            android:icon="@drawable/ic_cloud_queue_black_24dp"
+            android:title="@string/events_in_which_you_participate" />
+        <item
             android:id="@+id/nearlest"
             android:icon="@drawable/ic_cloud_queue_black_24dp"
             android:title="@string/the_nearlest" />
@@ -30,5 +34,13 @@
             android:id="@+id/morePeople"
             android:icon="@drawable/ic_cloud_queue_black_24dp"
             android:title="@string/more_people" />
+        <item
+            android:id="@+id/higherLevel"
+            android:icon="@drawable/ic_cloud_queue_black_24dp"
+            android:title="@string/from_weaker_to_stronger_players" />
+        <item
+            android:id="@+id/lowerLevel"
+            android:icon="@drawable/ic_cloud_queue_black_24dp"
+            android:title="@string/from_stronger_to_weaker_players" />
     </group>
 </menu>

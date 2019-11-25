@@ -75,12 +75,12 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
 
         joinButton.setOnClickListener {
             singleEventPresenter.joinToEvent()
-            //fragmentManager?.popBackStack()
+            fragmentManager?.popBackStack()
         }
 
         exitButton.setOnClickListener {
             singleEventPresenter.leaveEvent()
-            //fragmentManager?.popBackStack()
+            fragmentManager?.popBackStack()
         }
 
 

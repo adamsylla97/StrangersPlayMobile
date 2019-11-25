@@ -1,5 +1,7 @@
 package com.strangersplay.newest_event.model
 
+import com.strangersplay.add_event.model.UserIds
+
 data class Event(
     val authorId: Int,
     val category: String,

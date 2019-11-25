@@ -31,12 +31,14 @@ import java.util.*
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.widget.*
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import com.strangersplay.add_event.model.NewEventData
 import com.strangersplay.add_event.model.UserIds
 import com.strangersplay.newest_event.view.NewestEventFragment
 
-class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, MapboxMap.OnMapClickListener {
+class NewEventFragment : Fragment(), NewEventView, LocationEngineListener,
+    MapboxMap.OnMapClickListener {
 
     private lateinit var mapView: MapView
     private lateinit var map: MapboxMap
@@ -47,8 +49,8 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
     private var mapMarker: Marker? = null
 
 
-    private val presenter=InstanceProvider.getNewEventPresenter(this)
-
+    private val presenter = InstanceProvider.getNewEventPresenter(this)
+    var canAdding = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,17 +59,9 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
         Mapbox.getInstance(activity?.applicationContext!!, getString(R.string.access_token))
         return inflater.inflate(R.layout.fragment_add_event, container, false)
     }
-
-    override fun finishAdding() {
-            fragmentManager?.popBackStack()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        exitAddButton.setOnClickListener{
-            Log.i("qwerty","exit fragemnt")
-            fragmentManager?.beginTransaction()?.replace(R.id.newestEventFragment,NewestEventFragment())?.commit()
-        }
+
         mapView = view?.findViewById(R.id.mapView)!!
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
@@ -77,14 +71,27 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
         }
 
         createEventButton.setOnClickListener {
-            if (eventTitle.text.isNullOrEmpty() || price.text.isNullOrEmpty() ||
-                eventDescription.text.isNullOrEmpty()||mapMarker?.position?.latitude.toString().isNullOrEmpty()||mapMarker?.position?.longitude.toString().isNullOrEmpty()
-                || years.isNullOrEmpty()||month.isNullOrEmpty()||minute.isNullOrEmpty()||hour.isNullOrEmpty()||day.isNullOrEmpty()|| userLimit.text.isNullOrEmpty()) {
-                Toast.makeText(newEventFragment.context,"Please fill all fields correctly.",Toast.LENGTH_SHORT).show()
+            if (canAdding) {
+                if (eventTitle.text.isNullOrEmpty() || price.text.isNullOrEmpty() ||
+                    eventDescription.text.isNullOrEmpty() ||mapMarker==null || years.isNullOrEmpty() ||
+                    month.isNullOrEmpty() || minute.isNullOrEmpty() || hour.isNullOrEmpty() || day.isNullOrEmpty() || userLimit.text.isNullOrEmpty()
+                ) {
+                    Toast.makeText(
+                        newEventFragment.context,
+                        "Please fill all fields correctly.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    presenter.setNewEventInfo()
+                    canAdding=false
+                }
             }else{
-                presenter.setNewEventInfo()
-                fragmentManager?.beginTransaction()?.replace(R.id.newestEventFragment,NewestEventFragment())?.commit()
-                Log.i("qwerty", "create event")}
+                Toast.makeText(
+                    newEventFragment.context,
+                    "You can only add one event with this data",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
         eventTimeDay.setOnClickListener {
             Log.i("qwerty", "set day")
@@ -104,10 +111,10 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
         return NewEventData(
             authorId = 0,
             category = selectedCategory,
-            creationTime= "2019-11-20T17:09:00.931Z",
-            description =eventDescription.text.toString(),
+            creationTime = "2019-11-20T17:09:00.931Z",
+            description = eventDescription.text.toString(),
             eventLocation = mapMarker?.position?.latitude.toString() + "," + mapMarker?.position?.longitude.toString(),
-            eventTime = "$years-$month-$day  $hour:$minute" ,
+            eventTime = "$years-$month-$day  $hour:$minute",
             id = 0,
             image = listOf(""),
             level = selectedLevel,
@@ -136,7 +143,7 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
 
         override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
             selectedCategory = p0?.getItemAtPosition(p2) as String
-            selectedCategory=p0?.getItemAtPosition(p2) as String
+            selectedCategory = p0?.getItemAtPosition(p2) as String
         }
     }
 
@@ -161,11 +168,11 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
         levelSpinner.onItemSelectedListener = createSpinnerListener2()
     }
 
-    var day=""
-    var month=""
-    var years=""
-    var minute=""
-    var hour=""
+    var day = ""
+    var month = ""
+    var years = ""
+    var minute = ""
+    var hour = ""
 
     var calendar = Calendar.getInstance()
     override fun setupCalender() {
@@ -178,6 +185,7 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
             calendar.get(Calendar.DAY_OF_MONTH)
         ).show()
     }
+
     override fun setupClock() {
         TimePickerDialog(
             this.context!!,
@@ -190,12 +198,13 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
 
     val timeSetListener = object : TimePickerDialog.OnTimeSetListener {
         override fun onTimeSet(
-            view: TimePicker, hours: Int, minutes: Int) {
-            calendar.set(Calendar.HOUR_OF_DAY,hours).toString()
-            calendar.set(Calendar.MINUTE,minutes).toString()
-            hour= calendar.time.hours.toString()
+            view: TimePicker, hours: Int, minutes: Int
+        ) {
+            calendar.set(Calendar.HOUR_OF_DAY, hours).toString()
+            calendar.set(Calendar.MINUTE, minutes).toString()
+            hour = calendar.time.hours.toString()
             minute = calendar.time.minutes.toString()
-            eventTimeHours.setText(hour+":" +minute)
+            eventTimeHours.setText(hour + ":" + minute)
         }
     }
     val dateSetListener = object : DatePickerDialog.OnDateSetListener {
@@ -207,39 +216,47 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
             calendar.set(Calendar.MONTH, monthOfYear)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             years = (Integer.parseInt(calendar.time.year.toString()) + 1900).toString()
-            month= calendar.time.month.toString()
+            month = calendar.time.month.toString()
             day = calendar.time.date.toString()
-            eventTimeDay.setText(years+"/"+month+"/ "+day)
+            eventTimeDay.setText(years + "/" + month + "/ " + day)
         }
     }
 
-    private fun enableLocation(){
+    private fun enableLocation() {
         initializeLocationEngine()
         initializeLocationLayer()
     }
 
-    private fun initializeLocationEngine(){
-        locationEngine = LocationEngineProvider(activity?.applicationContext).obtainBestLocationEngineAvailable()
+    private fun initializeLocationEngine() {
+        locationEngine =
+            LocationEngineProvider(activity?.applicationContext).obtainBestLocationEngineAvailable()
         locationEngine?.priority = LocationEnginePriority.HIGH_ACCURACY
         locationEngine?.activate()
 
         val lastLocation = locationEngine?.lastLocation
-        if(lastLocation != null){
+        if (lastLocation != null) {
             originLocation = lastLocation
-        }else{
+        } else {
             locationEngine?.addLocationEngineListener(this)
         }
     }
 
-    private fun initializeLocationLayer(){
+    private fun initializeLocationLayer() {
         locationLayerPlugin = LocationLayerPlugin(mapView, map, locationEngine)
         locationLayerPlugin?.setLocationLayerEnabled(true)
         locationLayerPlugin?.cameraMode = CameraMode.TRACKING
         locationLayerPlugin?.renderMode = RenderMode.NORMAL
     }
 
-    private fun setCameraPosition(location: Location){
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(location.latitude, location.longitude), 13.0))
+    private fun setCameraPosition(location: Location) {
+        map.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    location.latitude,
+                    location.longitude
+                ), 13.0
+            )
+        )
     }
 
     override fun onMapClick(point: LatLng) {
@@ -265,7 +282,7 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
 
     override fun onStart() {
         super.onStart()
-        if(PermissionsManager.areLocationPermissionsGranted(activity?.applicationContext)){
+        if (PermissionsManager.areLocationPermissionsGranted(activity?.applicationContext)) {
             locationEngine?.requestLocationUpdates()
             locationLayerPlugin?.onStart()
         }
@@ -297,7 +314,7 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener, Mapbo
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        if(outState != null) {
+        if (outState != null) {
             mapView.onSaveInstanceState(outState)
         }
     }
