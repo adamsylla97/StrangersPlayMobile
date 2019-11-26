@@ -1,5 +1,6 @@
 package com.strangersplay.single_category.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class SingleCategoryAdapter(private val listener: (Int) -> Unit): RecyclerView.A
             view.eventTitle.text = event.title
             Glide.with(view).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(view.eventImage)
             view.setOnClickListener {
+                Log.i("supertest1234",event.toString())
                 itemClick(event.id)
             }
         }

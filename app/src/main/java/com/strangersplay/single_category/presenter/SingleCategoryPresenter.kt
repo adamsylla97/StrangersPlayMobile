@@ -1,5 +1,6 @@
 package com.strangersplay.single_category.presenter
 
+import android.util.Log
 import com.strangersplay.newest_event.model.NewestEventService
 import com.strangersplay.single_category.model.SingleCategoryService
 import com.strangersplay.single_category.view.SingleCategoryView
@@ -24,6 +25,7 @@ class SingleCategoryPresenter(private val eventsService: SingleCategoryService, 
             val events = eventsService.fetchEvents(eventType)
             mainScope.launch {
                 singleCategoryView.updateList(events)
+                Log.i("supertest cate", events.toString())
             }
         }
 

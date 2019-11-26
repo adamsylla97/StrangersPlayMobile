@@ -15,7 +15,6 @@ import kotlinx.android.synthetic.main.fragment_single_category.*
 
 class SingleCategoryFragment(private val categoryName: String) : Fragment(), SingleCategoryView {
 
-    private val presenter = InstanceProvider.getSingleCategoryPresenter(this)
     private val categoryAdapter = SingleCategoryAdapter{onItemClicked(it)}
 
     override fun onCreateView(
@@ -34,6 +33,8 @@ class SingleCategoryFragment(private val categoryName: String) : Fragment(), Sin
             adapter = categoryAdapter
         }
 
+        val presenter = InstanceProvider.getSingleCategoryPresenter(this)
+
         presenter.fetchEvents(categoryName)
 
     }
@@ -44,11 +45,9 @@ class SingleCategoryFragment(private val categoryName: String) : Fragment(), Sin
     }
 
     private fun onItemClicked(eventId: Int){
-        val singleEventFragment = SingleEventFragment(eventId)
+        val singleEventFragment = SingleEventFragment.newInstance(eventId)
         fragmentManager?.let{
-            it.beginTransaction()
-                .replace(R.id.singleCategoryFragment,singleEventFragment)
-                .commit()
+            it.beginTransaction().add(R.id.singleCategoryFragment, singleEventFragment).addToBackStack("newestEvent").commit()
         }
     }
 

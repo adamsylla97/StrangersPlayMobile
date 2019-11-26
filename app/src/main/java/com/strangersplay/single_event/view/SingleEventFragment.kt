@@ -2,6 +2,7 @@ package com.strangersplay.single_event.view
 
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,7 @@ import com.strangersplay.user_profile.display.view.UserProfileFragment
 import kotlinx.android.synthetic.main.fragment_add_event.view.*
 import kotlinx.android.synthetic.main.fragment_single_event.*
 
-class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventView, LocationEngineListener {
+class SingleEventFragment() : Fragment(), SingleEventView, LocationEngineListener {
 
     private lateinit var mapView: MapView
     private lateinit var map: MapboxMap
@@ -43,16 +44,30 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
     private var locationEngine: LocationEngine? = null
     private var locationLayerPlugin: LocationLayerPlugin? = null
 
+    private var eventId = -1
+
     private val singleEventPresenter = InstanceProvider.getSingleEventPresenter(this)
 
     private val usersAdapter = UsersInEventRecyclerViewAdapter {onItemClicked(it)}
 
+    companion object {
+
+        fun newInstance(eventId: Int): SingleEventFragment {
+            val fragment = SingleEventFragment()
+            val bundle = Bundle()
+            bundle.putInt("eventId", eventId)
+            fragment.arguments = bundle
+            return fragment
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        eventId = arguments?.getInt("eventId") ?: -1
         Mapbox.getInstance(activity?.applicationContext!!, getString(R.string.access_token))
         return inflater.inflate(R.layout.fragment_single_event, container, false)
     }
@@ -60,7 +75,7 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mapView = view?.findViewById(R.id.singleEventMapView)!!
+        mapView = view.findViewById(R.id.singleEventMapView)!!
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync { mapboxMap ->
             map = mapboxMap
@@ -87,11 +102,13 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
     }
 
     override fun getEventId(): Int {
+        Log.i("supertest123", eventId.toString())
         return eventId
     }
 
     override fun updateList(users: List<UserIds>) {
         usersAdapter.addList(users)
+        Log.i("supertest 12", users.toString())
         usersAdapter.notifyDataSetChanged()
     }
 
@@ -114,7 +131,7 @@ class SingleEventFragment(private val eventId: Int) : Fragment(), SingleEventVie
     private fun onItemClicked(userId: Int){
         val userProfileFragment = UserProfileFragment.newInstance(userId)
         fragmentManager?.let{
-            fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, userProfileFragment)?.addToBackStack("profile")
+            fragmentManager?.beginTransaction()?.add(R.id.singleEventFragment, userProfileFragment)?.addToBackStack("profile")
                 ?.commit()
         }
     }

@@ -11,8 +11,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/newestEventsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/secondaryDarkColor"/>
+        android:layout_height="0dp"
+        android:background="@color/secondaryDarkColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="16dp"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

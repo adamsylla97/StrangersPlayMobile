@@ -65,7 +65,7 @@ class NewestEventFragment : Fragment(), NewestEventView {
     }
 
     private fun onItemClicked(eventId: Int){
-        var singleEventFragment = SingleEventFragment(eventId)
+        val singleEventFragment = SingleEventFragment.newInstance(eventId)
         fragmentManager?.let{
             fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, singleEventFragment)?.addToBackStack("newestEvent")
                 ?.commit()

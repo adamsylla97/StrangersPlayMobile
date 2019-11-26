@@ -26,12 +26,14 @@ class UserProfileFragment : Fragment(), UserProfileView {
     private var userId = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        userId = arguments?.getInt("userId",0) ?: 0
+        userId = arguments?.getInt("userId",0) ?: -1
         return inflater.inflate(R.layout.fragment_user_profile, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if(userId == -1) userId = Config.userToken
 
         userComments.apply {
             layoutManager = LinearLayoutManager(context)
