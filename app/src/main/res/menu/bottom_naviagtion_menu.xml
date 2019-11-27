@@ -13,7 +13,13 @@
         android:icon="@drawable/ic_alien_head"
         android:title="@string/profile_menu_title"/>
 
+    <item
+        android:id="@+id/joinedEventFragment"
+        android:icon="@drawable/ic_cloud_queue_black_24dp"
+        android:title="@string/joined_events" />
+
     <item android:id="@+id/newEventFragment"
         android:icon="@drawable/ic_add_event"
         android:title="@string/add_event"/>
+
 </menu>

@@ -117,9 +117,18 @@ class SingleEventFragment() : Fragment(), SingleEventView, LocationEngineListene
         Glide.with(this).load("").placeholder(R.drawable.ic_cloud_queue_black_24dp).into(eventImage)
         eventRatingBar.numStars = event.level
         eventContributionTextView.text = event.price.toString()
-        val position = event.eventLocation.split(",")
-        if(position.size == 2) {
-            map.addMarker(MarkerOptions().position(LatLng(position[0].toDouble(), position[1].toDouble())))
+        if(event.eventLocation != "null,null") {
+            val position = event.eventLocation.split(",")
+            if (position.size == 2) {
+                map.addMarker(
+                    MarkerOptions().position(
+                        LatLng(
+                            position[0].toDouble(),
+                            position[1].toDouble()
+                        )
+                    )
+                )
+            }
         }
     }
 

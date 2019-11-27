@@ -1,5 +1,6 @@
 package com.strangersplay
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -8,6 +9,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
+import com.strangersplay.background_service.intent_service.StrangersPlayBackgroundService
 import kotlinx.android.synthetic.main.activity_main.*
 import java.security.AccessControlContext
 
@@ -19,6 +21,9 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        var intent = Intent(applicationContext, StrangersPlayBackgroundService::class.java)
+        startService(intent)
 
         if(permissionManager == null) {
             permissionManager = PermissionsManager(this)

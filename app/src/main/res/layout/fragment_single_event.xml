@@ -9,6 +9,7 @@
     tools:context=".single_event.view.SingleEventFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/singleEventFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/secondaryDarkColor"
@@ -52,8 +53,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:numStars="5"
                     android:isIndicator="true"
+                    android:numStars="5"
                     android:stepSize="0.5" />
 
                 <TextView
@@ -71,8 +72,8 @@
                     android:layout_height="166dp"
                     mapbox:mapbox_cameraTargetLat="37.7749"
                     mapbox:mapbox_cameraTargetLng="-122.4194"
-                    mapbox:mapbox_styleUrl="mapbox://styles/mapbox/streets-v10"
-                    mapbox:mapbox_cameraZoom="12" />
+                    mapbox:mapbox_cameraZoom="12"
+                    mapbox:mapbox_styleUrl="mapbox://styles/mapbox/streets-v10" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -134,23 +135,23 @@
 
                 <TextView
                     android:id="@+id/useresTV"
-                    android:text="Użytkownicy biorący udział:"
-                    android:textColor="@color/secondaryTextColor"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:padding="5dp"
+                    android:text="Użytkownicy biorący udział:"
                     android:textAlignment="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/secondaryTextColor"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/usersInEvent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/user_in_event_item"
-                    tools:itemCount="3"/>
+                    tools:itemCount="3"
+                    tools:listitem="@layout/user_in_event_item" />
 
             </LinearLayout>
         </ScrollView>
