@@ -1,5 +1,6 @@
 package com.strangersplay.user_profile.display.presenter
 
+import android.util.Log
 import com.strangersplay.Config
 import com.strangersplay.user_profile.display.model.UserData
 import com.strangersplay.user_profile.display.model.UserProfileService
@@ -30,6 +31,7 @@ class UserProfilePresenter(
             val userId = userProfileView.getUserId()
             val profileInformation = userProfileService.getUserProfileInformation(userId)
             profile = profileInformation
+            Log.i("grazyna123",profileInformation.toString())
             mainScope.launch {
                 userProfileView.updateProfile(profileInformation)
             }
