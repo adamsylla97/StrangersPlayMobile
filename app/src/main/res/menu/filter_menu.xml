@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/sortBy"
         android:enabled="false"
@@ -42,5 +43,12 @@
             android:id="@+id/lowerLevel"
             android:icon="@drawable/ic_cloud_queue_black_24dp"
             android:title="@string/from_stronger_to_weaker_players" />
+    </group>
+    <group>
+        <item
+            android:id="@+id/rateIcon"
+            android:icon="@drawable/ic_rate_24dp"
+            android:title="@string/rate"
+            app:showAsAction="ifRoom" />
     </group>
 </menu>
