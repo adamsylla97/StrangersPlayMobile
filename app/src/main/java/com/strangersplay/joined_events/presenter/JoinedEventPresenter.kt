@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import com.strangersplay.Config
 import com.strangersplay.joined_events.view.JoinedEventView
+import com.strangersplay.newest_event.model.Event
 import com.strangersplay.newest_event.model.NewestEventService
 import com.strangersplay.newest_event.model.UserIds
 import com.strangersplay.newest_event.presenter.FilterOptions
@@ -48,9 +49,24 @@ class JoinedEventPresenter(private val newestEventService: NewestEventService,
 
     fun filterList(filterOptions: FilterOptions) {
         ioScope.launch {
+            val events = ArrayList<Event>()
+
             val eventsList = newestEventService.getNewestItems()
-            val events = eventsList.filter{ it.authorId == Config.userToken ||
-                    it.userIdsList.contains(com.strangersplay.add_event.model.UserIds(Config.userToken))  }
+
+            eventsList.forEach {
+                if(it.authorId == Config.userToken){
+                    events.add(it)
+                }else{
+                    val e = it
+                    it.userIdsList.forEach {
+                        if(it.userId == Config.userToken){
+                            events.add(e)
+                        }
+                    }
+                }
+            }
+//            val events = eventsList.filter{ it.authorId == Config.userToken ||
+//                    it.userIdsList.contains(Config.userToken)  }
 
             mainScope.launch {
                 when (filterOptions) {

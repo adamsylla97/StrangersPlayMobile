@@ -29,7 +29,7 @@ class JoinedEventFragment : Fragment(), JoinedEventView {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        setHasOptionsMenu(true)
+        setHasOptionsMenu(false)
         return inflater.inflate(R.layout.fragment_joined_event, container, false)
     }
 
@@ -62,8 +62,23 @@ class JoinedEventFragment : Fragment(), JoinedEventView {
     }
 
     override fun updateList(events: List<Event>) {
-        val eventsList = events.filter{ it.authorId == Config.userToken ||
-                it.userIdsList.contains(com.strangersplay.add_event.model.UserIds(Config.userToken))    }
+
+        val eventsList = ArrayList<Event>()
+
+        events.forEach {
+            if(it.authorId == Config.userToken){
+                eventsList.add(it)
+            }else{
+                val e = it
+                it.userIdsList.forEach {
+                    if(it.userId == Config.userToken){
+                        eventsList.add(e)
+                    }
+                }
+            }
+        }
+//        val eventsList = events.filter{ it.authorId == Config.userToken ||
+//                it.userIdsList.contains(com.strangersplay.add_event.model.UserIds(Config.userToken, Config.username))    }
         newestEventAdapter.addList(eventsList)
         newestEventAdapter.notifyDataSetChanged()
     }

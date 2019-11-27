@@ -17,9 +17,10 @@
         android:icon="@drawable/ic_add_event"
         android:title="@string/add_event"/>
 
-    <item android:id="@+id/joinedEventFragment"
+    <item
+        android:id="@+id/joinedEventFragment"
         android:icon="@drawable/ic_add"
-        android:title="@string/add_event"/>
+        android:title="@string/joined_events" />
 
 
 </menu>
