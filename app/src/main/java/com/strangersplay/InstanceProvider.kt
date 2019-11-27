@@ -151,22 +151,11 @@ object InstanceProvider {
         return presenter
     }
 
-    }
-
     fun getJoinedEventPresenter(view: JoinedEventView, locationManager: LocationManager): JoinedEventPresenter {
         val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
         val dataProvider = NewestEventDataProvider(rest)
         val service = NewestEventService(dataProvider)
         val presenter = JoinedEventPresenter(service, view, locationManager)
-        return presenter
-    }
-          }
-
-    fun getEndedEventPresenter(view: NewestEventView,locationManager: LocationManager): EndedEventsPresenter {
-        val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
-        val dataProvider = NewestEventDataProvider(rest)
-        val service = NewestEventService(dataProvider)
-        val presenter = EndedEventsPresenter(service, view,locationManager)
         return presenter
     }
 

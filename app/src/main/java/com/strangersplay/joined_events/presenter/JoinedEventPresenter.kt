@@ -50,7 +50,7 @@ class JoinedEventPresenter(private val newestEventService: NewestEventService,
         ioScope.launch {
             val eventsList = newestEventService.getNewestItems()
             val events = eventsList.filter{ it.authorId == Config.userToken ||
-                    it.userIdsList.contains(UserIds(Config.userToken))  }
+                    it.userIdsList.contains(com.strangersplay.add_event.model.UserIds(Config.userToken))  }
 
             mainScope.launch {
                 when (filterOptions) {
