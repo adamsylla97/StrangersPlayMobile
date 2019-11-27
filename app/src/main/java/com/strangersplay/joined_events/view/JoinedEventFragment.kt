@@ -62,13 +62,14 @@ class JoinedEventFragment : Fragment(), JoinedEventView {
     }
 
     override fun updateList(events: List<Event>) {
-        val eventsList = events.filter{ it.userIdsList.contains(UserIds(Config.userToken))  }
+        val eventsList = events.filter{ it.authorId == Config.userToken ||
+                it.userIdsList.contains(com.strangersplay.add_event.model.UserIds(Config.userToken))    }
         newestEventAdapter.addList(eventsList)
         newestEventAdapter.notifyDataSetChanged()
     }
 
     private fun onItemClicked(eventId: Int){
-        var singleEventFragment = SingleEventFragment(eventId)
+        var singleEventFragment = SingleEventFragment.newInstance(eventId)
         fragmentManager?.let{
             fragmentManager?.beginTransaction()?.add(R.id.joinedEventFragment, singleEventFragment)?.addToBackStack("joinedEvent")
                 ?.commit()
