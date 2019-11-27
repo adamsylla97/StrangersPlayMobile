@@ -69,7 +69,7 @@ class JoinedEventFragment : Fragment(), JoinedEventView {
     }
 
     private fun onItemClicked(eventId: Int){
-        var singleEventFragment = SingleEventFragment(eventId)
+        var singleEventFragment = SingleEventFragment.newInstance(eventId)
         fragmentManager?.let{
             fragmentManager?.beginTransaction()?.add(R.id.joinedEventFragment, singleEventFragment)?.addToBackStack("joinedEvent")
                 ?.commit()
