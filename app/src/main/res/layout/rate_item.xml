@@ -14,10 +14,10 @@
 
         <ImageView
             android:id="@+id/playerImage"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="82dp"
+            android:layout_height="85dp"
             android:layout_margin="10dp"
-            android:src="@drawable/ic_cloud_queue_black_24dp"
+            android:src="@drawable/ic_alien_head"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,23 +36,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <RatingBar
-            android:layout_width="236dp"
-            android:layout_height="57dp"
-            android:numStars="5"
-            android:layout_margin="10dp"
-            android:stepSize="0.5"
             android:id="@+id/ratingPlayer"
+            android:layout_width="233dp"
+            android:layout_height="47dp"
+            android:layout_margin="10dp"
             android:isIndicator="true"
+            android:numStars="5"
+            android:stepSize="0.5"
             app:layout_constraintStart_toEndOf="@id/playerImage"
             app:layout_constraintTop_toBottomOf="@id/playerName" />
-        <ImageView
-            android:id="@+id/rateButton"
-            android:src="@drawable/ic_rate"
-            android:layout_width="50dp"
+
+        <EditText
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/ratingPlayer"
+            android:hint="@string/give_some_feedback"
+            android:textAlignment="center"
+            android:layout_margin="10dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
