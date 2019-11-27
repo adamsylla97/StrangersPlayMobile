@@ -13,10 +13,9 @@ import com.strangersplay.background_service.intent_service.StrangersPlayBackgrou
 import kotlinx.android.synthetic.main.activity_main.*
 import java.security.AccessControlContext
 
-class MainActivity : AppCompatActivity(), PermissionsListener {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-    private var permissionManager: PermissionsManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,10 +24,7 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
         var intent = Intent(applicationContext, StrangersPlayBackgroundService::class.java)
         startService(intent)
 
-        if(permissionManager == null) {
-            permissionManager = PermissionsManager(this)
-            permissionManager?.requestLocationPermissions(this)
-        }
+
         setContentView(R.layout.activity_main)
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
         navigationBar.setupWithNavController(navController)
@@ -38,14 +34,5 @@ class MainActivity : AppCompatActivity(), PermissionsListener {
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(navController, null)
     }
-
-    override fun onExplanationNeeded(permissionsToExplain: MutableList<String>?) {
-
-    }
-
-    override fun onPermissionResult(granted: Boolean) {
-
-    }
-
 
 }

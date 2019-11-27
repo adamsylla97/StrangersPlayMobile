@@ -74,9 +74,9 @@ class StrangersPlayBackgroundService: Service() {
                 }else if(eventFromDatabase.userCount > event.userIdsList.size){
                     stringBuilder.append("${event.title}: someone left event\n")
                 }
-//                else{
-//                    stringBuilder.append("${event.title}: No change\n")
-//                }
+                else{
+                    stringBuilder.append("${event.title}: No change\n")
+                }
             }
         }
 
@@ -117,9 +117,10 @@ class StrangersPlayBackgroundService: Service() {
             val notification =
                 NotificationCompat.Builder(applicationContext, "StrengersPlayServiceChannel")
                     .setContentTitle("StrangersPlay info update")
-                    .setContentText(message)
                     .setWhen(System.currentTimeMillis())
                     .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setStyle(NotificationCompat.BigTextStyle()
+                        .bigText(message))
                     .build()
 
             notificationManager.notify(1, notification)
