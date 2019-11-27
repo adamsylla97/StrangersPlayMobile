@@ -46,8 +46,20 @@ class StrangersPlayBackgroundService: Service() {
                 ioScope.launch {
                     val events = restService.getNewestItems()
                     ioScope2.launch {
-                        val eventsList = events.filter{ it.authorId == Config.userToken ||
-                                it.userIdsList.contains(com.strangersplay.add_event.model.UserIds(Config.userToken))    }
+                        val eventsList = ArrayList<Event>()
+
+                        events.forEach {
+                            if(it.authorId == Config.userToken){
+                                eventsList.add(it)
+                            }else{
+                                val e = it
+                                it.userIdsList.forEach {
+                                    if(it.userId == Config.userToken){
+                                        eventsList.add(e)
+                                    }
+                                }
+                            }
+                        }
                         val message = preperMessageForNotification(eventsList)
                         showNotification(message)
                     }
@@ -73,8 +85,7 @@ class StrangersPlayBackgroundService: Service() {
                     stringBuilder.append("${event.title}: someone joined to event\n")
                 }else if(eventFromDatabase.userCount > event.userIdsList.size){
                     stringBuilder.append("${event.title}: someone left event\n")
-                }
-                else{
+                }else{
                     stringBuilder.append("${event.title}: No change\n")
                 }
             }
