@@ -44,7 +44,7 @@ class AddRateFragment(private val users: MutableList<UserIds>): Fragment(),AddRa
     private fun onItemClicked(pair: Pair<Rate, Int>){
         presenter.sendRates(pair.first)
         val value = users.find {
-            it.userId == pair.second
+            it.id == pair.second
         }
 
         Log.i("supertest 12 12", "${pair.second}  $value")

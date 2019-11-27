@@ -53,8 +53,10 @@ class AddRateAdapter(private val listener: (Pair<Rate, Int>) -> Unit) :
                     rate = view.ratingPlayer.numStars
                 )
                 Log.i("supertest123","kliklem")
-                itemClick(Pair<Rate, Int>(newRate, rate.userId))
+                itemClick(Pair<Rate, Int>(newRate, rate.id))
+                view.sendRating.isEnabled=false
             }
+
 
         }
 
