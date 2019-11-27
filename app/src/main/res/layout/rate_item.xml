@@ -40,19 +40,28 @@
             android:layout_width="233dp"
             android:layout_height="47dp"
             android:layout_margin="10dp"
-            android:isIndicator="true"
+            android:isIndicator="false"
             android:numStars="5"
             android:stepSize="0.5"
             app:layout_constraintStart_toEndOf="@id/playerImage"
             app:layout_constraintTop_toBottomOf="@id/playerName" />
 
         <EditText
+            android:id="@+id/rateDesc"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/ratingPlayer"
             android:hint="@string/give_some_feedback"
             android:textAlignment="center"
             android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/sendRating"
+            android:text="SEND RATING"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/rateDesc"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,9 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
+import com.strangersplay.add_event.model.UserIds
 import com.strangersplay.newest_event.adapters.NewestEventAdapter
 import com.strangersplay.newest_event.model.Event
 import com.strangersplay.newest_event.view.NewestEventView
+import com.strangersplay.rateUser.adapter.AddRateAdapter
 import com.strangersplay.rateUser.view.AddRateFragment
 import kotlinx.android.synthetic.main.fragment_newest_event.*
 
@@ -19,7 +21,7 @@ import kotlinx.android.synthetic.main.fragment_newest_event.*
 class EndedEventsFragment : Fragment(), NewestEventView {
 
     private lateinit var presenter: EndedEventsPresenter
-    private val newestEventAdapter = NewestEventAdapter{onItemClicked(it)}
+    private val newestEventAdapter = EndedEventsAdapter{onItemClicked(it)}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +47,8 @@ class EndedEventsFragment : Fragment(), NewestEventView {
         newestEventAdapter.notifyDataSetChanged()
     }
 
-    private fun onItemClicked(eventId: Int){
-        val addRateFragement=AddRateFragment(eventId)
+    private fun onItemClicked(eventId: List<UserIds>){
+        val addRateFragement=AddRateFragment(eventId.toMutableList())
         fragmentManager?.let{
             fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment, addRateFragement)?.addToBackStack("newestEvent")
                 ?.commit()
