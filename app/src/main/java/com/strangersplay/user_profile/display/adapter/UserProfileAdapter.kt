@@ -34,8 +34,8 @@ class UserProfileAdapter : RecyclerView.Adapter<UserProfileAdapter.CommentsHolde
 
     class CommentsHolder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(comment: Comment) {
-            view.commentUsername.text = comment.author
-            view.commentContent.text = comment.commentText
+            view.commentUsername.text = comment.authorUsername
+            view.commentContent.text = comment.description
         }
     }
 

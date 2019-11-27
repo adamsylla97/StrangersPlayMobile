@@ -42,5 +42,7 @@
     <string name="from_weaker_to_stronger_players">From weaker to stronger players</string>
     <string name="from_stronger_to_weaker_players">From stronger to weaker players</string>
     <string name="events_in_which_you_participate">Events in which you participate</string>
+    <string name="give_some_feedback">Give some feedback</string>
+    <string name="rate">Rate</string>
     <string name="joined_events">Joined events</string>
 </resources>

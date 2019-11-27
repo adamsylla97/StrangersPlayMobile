@@ -47,7 +47,7 @@ class StrangersPlayBackgroundService: Service() {
                     val events = restService.getNewestItems()
                     ioScope2.launch {
                         val eventsList = events.filter{ it.authorId == Config.userToken ||
-                                it.userIdsList.contains(UserIds(Config.userToken))    }
+                                it.userIdsList.contains(com.strangersplay.add_event.model.UserIds(Config.userToken))    }
                         val message = preperMessageForNotification(eventsList)
                         showNotification(message)
                     }

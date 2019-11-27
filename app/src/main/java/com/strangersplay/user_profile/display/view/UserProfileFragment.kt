@@ -67,8 +67,8 @@ class UserProfileFragment : Fragment(), UserProfileView {
         eventRatingBar.rating = profileInformation.level!!.toFloat()
         userNameTV.text = "${profileInformation.firstName}  ${profileInformation.lastName}"
         userInformation.text = profileInformation.description
-
-        userProfileAdapter.addList(profileInformation.comments ?: emptyList())
+        eventRatingBar.rating = profileInformation.rating?.toFloat() ?: 0.0f
+        userProfileAdapter.addList(profileInformation.commentList ?: emptyList())
         userProfileAdapter.notifyDataSetChanged()
     }
 

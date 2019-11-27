@@ -14,6 +14,6 @@ data class Event(
     val level: Int,
     val price: Double,
     val title: String,
-    val userIdsList: List<UserIds>,
+    val userIdsList: List<com.strangersplay.add_event.model.UserIds>,
     val userLimit: Int
 )

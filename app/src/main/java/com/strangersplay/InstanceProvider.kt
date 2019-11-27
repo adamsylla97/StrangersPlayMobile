@@ -24,6 +24,10 @@ import com.strangersplay.newest_event.model.NewestEventService
 import com.strangersplay.newest_event.network.RestNewestEventService
 import com.strangersplay.newest_event.presenter.NewestEventPresenter
 import com.strangersplay.newest_event.view.NewestEventView
+import com.strangersplay.rateUser.EndedEvents.EndedEventsPresenter
+import com.strangersplay.rateUser.network.RestAddRateService
+import com.strangersplay.rateUser.presenter.AddRatePresenter
+import com.strangersplay.rateUser.view.AddRateView
 import com.strangersplay.register.model.RegisterDataProvider
 import com.strangersplay.register.model.RegisterService
 import com.strangersplay.register.network.RestRegisterService
@@ -131,6 +135,53 @@ object InstanceProvider {
         val service = NewEventService(dataProvider)
         val presenter = NewEventPresenter(view,service)
         return presenter
+          }
+
+    fun getEndedEventPresenter(view: NewestEventView,locationManager: LocationManager): EndedEventsPresenter {
+        val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
+        val dataProvider = NewestEventDataProvider(rest)
+        val service = NewestEventService(dataProvider)
+        val presenter = EndedEventsPresenter(service, view,locationManager)
+        return presenter
+    }
+
+    fun getAddRatePresenter(view: AddRateView): AddRatePresenter {
+        val rest = RestServiceBuilder.build(RestAddRateService::class.java)
+        val presenter = AddRatePresenter(rest, view)
+        return presenter
+    }
+
+    fun getJoinedEventPresenter(view: JoinedEventView, locationManager: LocationManager): JoinedEventPresenter {
+        val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
+        val dataProvider = NewestEventDataProvider(rest)
+        val service = NewestEventService(dataProvider)
+        val presenter = JoinedEventPresenter(service, view, locationManager)
+        return presenter
+    }
+
+
+    fun getEndedEventPresenter(view: NewestEventView,locationManager: LocationManager): EndedEventsPresenter {
+        val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
+        val dataProvider = NewestEventDataProvider(rest)
+        val service = NewestEventService(dataProvider)
+        val presenter = EndedEventsPresenter(service, view,locationManager)
+        return presenter
+    }
+
+    fun getAddRatePresenter(view: AddRateView): AddRatePresenter {
+        val rest = RestServiceBuilder.build(RestAddRateService::class.java)
+        val presenter = AddRatePresenter(rest, view)
+        return presenter
+    }
+
+    fun getJoinedEventPresenter(view: JoinedEventView, locationManager: LocationManager): JoinedEventPresenter {
+        val rest = RestServiceBuilder.build(RestNewestEventService::class.java)
+        val dataProvider = NewestEventDataProvider(rest)
+        val service = NewestEventService(dataProvider)
+        val presenter = JoinedEventPresenter(service, view, locationManager)
+        return presenter
+    }
+
     }
 
     fun getJoinedEventPresenter(view: JoinedEventView, locationManager: LocationManager): JoinedEventPresenter {
