@@ -64,6 +64,7 @@ class NewestEventFragment : Fragment(), NewestEventView {
     }
 
     private fun goToRatePage(){
+        setHasOptionsMenu(false)
         fragmentManager?.let{
             fragmentManager?.beginTransaction()?.add(R.id.newestEventFragment,
                 EndedEventsFragment()

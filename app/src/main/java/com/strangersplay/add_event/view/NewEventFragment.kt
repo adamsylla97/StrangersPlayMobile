@@ -217,6 +217,8 @@ class NewEventFragment : Fragment(), NewEventView, LocationEngineListener,
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             years = (Integer.parseInt(calendar.time.year.toString()) + 1900).toString()
             month = calendar.time.month.toString()
+            val month2 =Integer.parseInt(month)+1
+            month=month2.toString()
             day = calendar.time.date.toString()
             eventTimeDay.setText(years + "/" + month + "/ " + day)
         }

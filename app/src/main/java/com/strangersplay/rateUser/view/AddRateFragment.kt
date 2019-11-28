@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.strangersplay.Config
 import com.strangersplay.InstanceProvider
 import com.strangersplay.R
 import com.strangersplay.add_event.model.UserIds
@@ -16,6 +17,7 @@ import com.strangersplay.rateUser.presenter.AddRatePresenter
 import com.strangersplay.single_event.view.SingleEventFragment
 import kotlinx.android.synthetic.main.fragment_rate_players.*
 import kotlinx.android.synthetic.main.fragment_single_category.*
+import java.lang.Exception
 
 class AddRateFragment(private val users: MutableList<UserIds>): Fragment(),AddRateView{
     override fun updateList(rates: List<Rate>) {
@@ -36,7 +38,9 @@ class AddRateFragment(private val users: MutableList<UserIds>): Fragment(),AddRa
             layoutManager = LinearLayoutManager(context)
             adapter = rateAdapter
         }
-
+        addRateButton.setOnClickListener{
+            fragmentManager?.popBackStack()
+        }
         rateAdapter.addList(users)
 
     }

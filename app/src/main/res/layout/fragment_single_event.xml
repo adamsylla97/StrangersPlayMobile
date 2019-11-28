@@ -115,7 +115,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="1"
                         android:background="@color/secondaryLightColor"
-                        android:text="Wyjdź"
+                        android:text="@string/opu"
                         android:textColor="@color/secondaryTextColor"
                         android:textSize="16dp"
                         android:textStyle="bold" />

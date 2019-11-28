@@ -22,7 +22,7 @@
         android:layout_margin="15dp"
         app:layout_constraintStart_toStartOf="parent"
         android:textAlignment="center"
-        android:text="@string/add"
+        android:text="@string/exit"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
